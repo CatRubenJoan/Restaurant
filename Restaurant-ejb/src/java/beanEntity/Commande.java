@@ -16,18 +16,18 @@ import javax.persistence.Temporal;
 public class Commande implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String numCommande;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateHeure;
     private int nbPersonne;
-    @ManyToOne
-    private Emplacement table; 
-    @OneToMany(mappedBy = "serveur")
-    private Collection<Emplacement> tables;
+//    @ManyToOne
+//    private Emplacement table; 
+//    @OneToMany(mappedBy = "serveur")
+//    private Collection<Emplacement> tables;
 
     public Commande() {
-        tables = new ArrayList<>();
+//        tables = new ArrayList<>();
     }
 
     public Commande(String numCommande, Date dateHeure, int nbPersonne) {
@@ -36,6 +36,11 @@ public class Commande implements Serializable {
         this.nbPersonne = nbPersonne;
     }
 
+    public Commande(Date dateHeure, int nbPersonne) {
+        this.dateHeure = dateHeure;
+        this.nbPersonne = nbPersonne;
+    }    
+    
     public String getNumCommande() {
         return numCommande;
     }

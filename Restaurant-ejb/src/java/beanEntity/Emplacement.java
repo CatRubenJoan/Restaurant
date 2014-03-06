@@ -18,13 +18,13 @@ public class Emplacement implements Serializable {
     private int numero;
     private int capacite;
     private String codeIHM;
-    @OneToMany(mappedBy = "table")
-    private Collection<Commande> commandes;
-    @ManyToOne
-    private Serveur serveur;
+//    @OneToMany(mappedBy = "table")
+//    private Collection<Commande> commandes;
+//    @ManyToOne
+//    private Serveur serveur;
 
     public Emplacement() {
-        commandes = new ArrayList<>();
+//        commandes = new ArrayList<>();
     }
 
     public Emplacement(int capacite, String codeIHM) {

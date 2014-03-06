@@ -1,44 +1,29 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controllers;
 
-import beanEntity.*;
-import beanSession.CommandeEnCoursLocal;
 import beanSession.EJBCuisinierLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "servletCreerObjet", urlPatterns = {"/servletCreerObjet"})
-public class servletCreerObjet extends HttpServlet {
+/**
+ *
+ * @author cdi412
+ */
+@WebServlet(name = "servCuisinier", urlPatterns = {"/servCuisinier"})
+public class servCuisinier extends HttpServlet {
     @EJB
     private EJBCuisinierLocal eJBCuisinier;
-    @EJB
-    private CommandeEnCoursLocal commandeEnCours;
+
     
-    /**
-     * Processes requests for both HTTP
-     * <code>GET</code> and
-     * <code>POST</code> methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -48,23 +33,17 @@ public class servletCreerObjet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet servletCreerObjet</title>");
+            out.println("<title>Servlet servCuisinier</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet servletCreerObjet at " + request.getContextPath() + "</h1>");
-            
-            out.println(commandeEnCours.creerCommandeBidon("02",new Date(), 3));
+            out.println("<h1>Servlet servCuisinier at " + request.getContextPath() + "</h1>");
             out.println( eJBCuisinier.creerCuisinier("1000", "Bouh"));
             out.println( eJBCuisinier.creerCuisinier("1001", "Ratatouille"));
-            
             out.println("</body>");
             out.println("</html>");
-        } finally {
+        } finally {            
             out.close();
         }
-    }
-
-    public servletCreerObjet() {
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -107,5 +86,4 @@ public class servletCreerObjet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

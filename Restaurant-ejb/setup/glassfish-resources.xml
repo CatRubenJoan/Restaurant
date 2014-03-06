@@ -12,4 +12,5 @@
     <jdbc-resource enabled="true" jndi-name="RESTAURANT" object-type="user" pool-name="microsoft_sql_RESTAURANT_saPool"/>
     <jdbc-resource enabled="true" jndi-name="resto2" object-type="user" pool-name="microsoft_sql_RESTAURANT_saPool"/>
     <jdbc-resource enabled="true" jndi-name="resto3" object-type="user" pool-name="microsoft_sql_RESTAURANT_saPool"/>
+    <jdbc-resource enabled="true" jndi-name="Restaurant" object-type="user" pool-name="microsoft_sql_RESTAURANT_saPool"/>
 </resources>

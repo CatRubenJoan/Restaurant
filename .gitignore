@@ -4,3 +4,5 @@
 *.jar
 *.war
 *.ear
+/Restaurant-war/dist/
+/Restaurant-ejb/dist/
