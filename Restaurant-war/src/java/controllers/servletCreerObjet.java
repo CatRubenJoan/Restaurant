@@ -4,6 +4,7 @@ import beanEntity.*;
 import beanSession.CommandeEnCoursLocal;
 import beanSession.EJBCuisinierLocal;
 import beanSession.EJBProduitLocal;
+import beanSession.EJBStatutLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -26,12 +27,13 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "servletCreerObjet", urlPatterns = {"/servletCreerObjet"})
 public class servletCreerObjet extends HttpServlet {
     @EJB
+    private EJBStatutLocal eJBStatut;
+    @EJB
     private EJBProduitLocal eJBProduit;
     @EJB
     private EJBCuisinierLocal eJBCuisinier;
     @EJB
     private CommandeEnCoursLocal commandeEnCours;
-    
     
     /**
      * Processes requests for both HTTP
@@ -60,8 +62,10 @@ public class servletCreerObjet extends HttpServlet {
 //            out.println(commandeEnCours.creerCommandeBidon(new Date(), 3));
             out.println( eJBCuisinier.creerCuisinier("1000", "Bouh"));
             out.println( eJBCuisinier.creerCuisinier("1001", "Ratatouille"));
-            out.println( eJBProduit.creerProduit("1","Pate","Pate","52", "vieux", true, 12.30f));
-            out.println( eJBProduit.creerProduit("2","Steak","Viande","556", "carnivor", true, 15.30f));
+            out.println( eJBProduit.creerProduit("3","Pate","Pate","52", "vieux", true, 12.30f));
+            out.println( eJBProduit.creerProduit("4","Steak","Viande","556", "carnivor", true, 15.30f));
+            eJBStatut.creerStatut();
+            out.println( eJBStatut.ajouterStatut("BOUH", "Bwwwwwwwwwwaaaaaaaaa"));
             
             out.println("</body>");
             out.println("</html>");

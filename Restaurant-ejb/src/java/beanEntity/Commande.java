@@ -16,14 +16,14 @@ import javax.persistence.Temporal;
 public class Commande implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @ GeneratedValue(strategy = GenerationType.IDENTITY)
     private String numCommande;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateHeure;
     private int nbPersonne;
-//    @ManyToOne
+//    @ ManyToOne
 //    private Emplacement table; 
-//    @OneToMany(mappedBy = "serveur")
+//    @ OneToMany(mappedBy = "serveur")
 //    private Collection<Emplacement> tables;
 
     public Commande() {
