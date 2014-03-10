@@ -16,21 +16,21 @@ import javax.persistence.Temporal;
 public class Commande implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-//    @ GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String numCommande;
+    @ GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int numCommande;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateHeure;
     private int nbPersonne;
-//    @ ManyToOne
-//    private Emplacement table; 
-//    @ OneToMany(mappedBy = "serveur")
-//    private Collection<Emplacement> tables;
+    @ ManyToOne
+    private Emplacement table; 
+    @ OneToMany(mappedBy = "commandeReglee")
+    private Collection<Paiement> paiements;
 
     public Commande() {
-//        tables = new ArrayList<>();
+        paiements = new ArrayList<>();
     }
 
-    public Commande(String numCommande, Date dateHeure, int nbPersonne) {
+    public Commande(int numCommande, Date dateHeure, int nbPersonne) {
         this.numCommande = numCommande;
         this.dateHeure = dateHeure;
         this.nbPersonne = nbPersonne;
@@ -41,11 +41,11 @@ public class Commande implements Serializable {
         this.nbPersonne = nbPersonne;
     }    
     
-    public String getNumCommande() {
+    public int getNumCommande() {
         return numCommande;
     }
 
-    public void setNumCommande(String numCommande) {
+    public void setNumCommande(int numCommande) {
         this.numCommande = numCommande;
     }
 
@@ -65,8 +65,24 @@ public class Commande implements Serializable {
         this.nbPersonne = nbPersonne;
     }
 
+    public Emplacement getTable() {
+        return table;
+    }
+
+    public void setTable(Emplacement table) {
+        this.table = table;
+    }
+
+    public Collection<Paiement> getPaiements() {
+        return paiements;
+    }
+
+    public void setPaiements(Collection<Paiement> paiements) {
+        this.paiements = paiements;
+    }
+
     @Override
     public String toString() {
-        return "Commande n°" + numCommande;
+        return "Commande n°" + numCommande + "\n\t Table : "+table;
     }
 }
