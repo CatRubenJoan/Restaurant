@@ -18,13 +18,13 @@ public class Emplacement implements Serializable {
     private int numero;
     private int capacite;
     private String codeIHM;
-//    @OneToMany(mappedBy = "table")
-//    private Collection<Commande> commandes;
-//    @ManyToOne
-//    private Serveur serveur;
+    @OneToMany(mappedBy = "table")
+    private Collection<Commande> commandes;
+    @ManyToOne
+    private Serveur serveur;
 
     public Emplacement() {
-//        commandes = new ArrayList<>();
+        commandes = new ArrayList<>();
     }
 
     public Emplacement(int capacite, String codeIHM) {
@@ -62,9 +62,24 @@ public class Emplacement implements Serializable {
         this.numero = numero;
     }
 
+    public Collection<Commande> getCommandes() {
+        return commandes;
+    }
+
+    public void setCommandes(Collection<Commande> commandes) {
+        this.commandes = commandes;
+    }
+
+    public Serveur getServeur() {
+        return serveur;
+    }
+
+    public void setServeur(Serveur serveur) {
+        this.serveur = serveur;
+    }
+    
     @Override
     public String toString() {
         return "Table n°" + numero;
     }
-    
 }
