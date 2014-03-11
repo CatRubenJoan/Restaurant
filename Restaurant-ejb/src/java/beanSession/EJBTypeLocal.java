@@ -22,7 +22,6 @@ public interface EJBTypeLocal {
      * @return 
      */
     public boolean modifierType(String id, String lib);
-    public boolean modifierType(Type t, String lib);
     public boolean supprimerType(String id);
-    public boolean supprimerType(Type t);
+//    public Type unType(String id);
 }

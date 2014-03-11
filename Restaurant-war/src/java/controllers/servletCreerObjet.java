@@ -1,5 +1,7 @@
 package controllers;
 
+import beanEntity.Produit;
+import beanEntity.SousType;
 import beanSession.CommandeEnCoursLocal;
 import beanSession.EJBCuisinierLocal;
 import beanSession.EJBProduitLocal;
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "servletCreerObjet", urlPatterns = {"/servletCreerObjet"})
 public class servletCreerObjet extends HttpServlet {
+
     @EJB
     private EJBPromotionLocal eJBPromotion;
     @EJB
@@ -74,25 +77,32 @@ public class servletCreerObjet extends HttpServlet {
             out.println("<br>" + eJBCuisinier.creerCuisinier("1001", "Ratatouille"));
             out.println("<br>Promotion");
             idPromo = eJBPromotion.creerPromotion(10f, new Date(), new Date()).getId();
-            out.println("<br>"+idPromo);
+            out.println("<br>" + idPromo);
             out.println("<br>Produit");
             p1 = eJBProduit.creerProduit("Pate", "Pate", "52", "vieux", true, 12.30f, "PAT").getReference();
             p2 = eJBProduit.creerProduit("Steak", "Viande", "556", "carnivor", true, 15.30f, "VIA").getReference();
             out.println("<br>" + p1);
             out.println("<br>" + p2);
             out.println("<br>Attribuer un cuisinier");
-            out.println("<br>" + eJBProduit.attribuerCuisinier(Integer.toString(p2), "1000"));
+            out.println("<br>" + eJBProduit.attribuerCuisinier(p2, "1000"));
             out.println("<br>Attribuer une promotion");
-            out.println("<br>" + eJBProduit.attribuerPromotion(Integer.toString(p1), idPromo));
+            out.println("<br>" + eJBProduit.attribuerPromotion(p1, idPromo));
+            out.println("<br>" + eJBProduit.attribuerPromotion(p2, idPromo));
+            for (Produit p : eJBPromotion.unePromotion(idPromo).getLesProduits()) {
+                out.println("<br>" + p.getNom());
+            }
+            out.println("<br>Ajouter Sous Type");
+            eJBSousType.ajouterSousType("BEU", "BEURK", "BOI");
+//            for (SousType s : eJBType.) {
+//                out.println("<br>" + p.getNom());
+//            }
+
 
             out.println("</body>");
             out.println("</html>");
         } finally {
             out.close();
         }
-    }
-
-    public servletCreerObjet() {
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

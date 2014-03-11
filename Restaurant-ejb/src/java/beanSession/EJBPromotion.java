@@ -26,4 +26,10 @@ public class EJBPromotion implements EJBPromotionLocal {
         em.persist(p1);
         return p1;
     }
+
+    @Override
+    public Promotion unePromotion(int id) {
+        Promotion p = em.find(Promotion.class, id);
+        return p;
+    }
 }

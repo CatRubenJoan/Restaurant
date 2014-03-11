@@ -4,7 +4,6 @@
  */
 package beanSession;
 
-import beanEntity.Type;
 import javax.ejb.Local;
 
 /**
@@ -14,6 +13,14 @@ import javax.ejb.Local;
 @Local
 public interface EJBSousTypeLocal {
     public void creerSousType();
-    public boolean ajouterSousType(String id, String lib, Type tp); 
-    public boolean ajouterSousType(String id, String lib, String type);    
+    public boolean ajouterSousType(String id, String lib, String type);
+    /**
+     * Modifier le libellé du sous type
+     * @param id : id du sous type à modifier
+     * @param lib : nouveau libellé modifié
+     * @return 
+     */
+    public boolean modifierSousType(String id, String lib);
+    public boolean modifierSousType(String id, String lib, String type);
+    public boolean supprimerSousType(String id);
 }

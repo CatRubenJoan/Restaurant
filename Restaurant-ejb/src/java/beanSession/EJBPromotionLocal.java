@@ -15,4 +15,5 @@ import javax.ejb.Local;
 @Local
 public interface EJBPromotionLocal {
     public Promotion creerPromotion(float taux, Date dateDebut, Date dateFin);
+    public Promotion unePromotion(int id);
 }

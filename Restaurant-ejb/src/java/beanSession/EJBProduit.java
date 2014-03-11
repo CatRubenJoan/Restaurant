@@ -24,29 +24,18 @@ public class EJBProduit implements EJBProduitLocal {
     EntityManager em;
 
     @Override
-    public Produit creerProduit(String nom, String composition, String qualiteNutritive, String historique, boolean disponibilite, float prixHt, SousType sousType) {
-        Produit p1 = new Produit(nom, composition, qualiteNutritive, historique, disponibilite, prixHt, sousType);
-        sousType.getLesProduits().add(p1);
-        em.merge(sousType);
-        em.persist(p1);
-
-        return p1;
-    }
-
-    @Override
     public Produit creerProduit(String nom, String composition, String qualiteNutritive, String historique, boolean disponibilite, float prixHt, String sousTypeId) {
 
         SousType s1 = em.find(SousType.class, sousTypeId);
         Produit p1 = new Produit(nom, composition, qualiteNutritive, historique, disponibilite, prixHt, s1);
         s1.getLesProduits().add(p1);
-        em.merge(s1);
         em.persist(p1);
 
         return p1;
     }
 
     @Override
-    public boolean attribuerCuisinier(String p, String c) {
+    public boolean attribuerCuisinier(int p, String c) {
         boolean test = false;
 
         if ((em.find(Produit.class, p) != null) && (em.find(Cuisinier.class, c) != null)) {
@@ -63,7 +52,7 @@ public class EJBProduit implements EJBProduitLocal {
     }
 
     @Override
-    public boolean attribuerPromotion(String prod, int promo) {
+    public boolean attribuerPromotion(int prod, int promo) {
         boolean test = false;
 
         if ((em.find(Produit.class, prod) != null) && (em.find(Promotion.class, promo) != null)) {
@@ -71,7 +60,6 @@ public class EJBProduit implements EJBProduitLocal {
             Promotion pr1 = (em.find(Promotion.class, promo));
             pr1.getLesProduits().add(p1);
             p1.setPromo(pr1);
-            em.merge(pr1);
             em.merge(p1);
 
             test = true;
@@ -88,7 +76,6 @@ public class EJBProduit implements EJBProduitLocal {
             for (Produit p : prod) {
                 pr1.getLesProduits().add(p);
                 p.setPromo(pr1);
-                em.merge(pr1);
                 em.merge(p);
             }
             test = true;
