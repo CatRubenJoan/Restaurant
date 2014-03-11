@@ -1,12 +1,6 @@
 *.class
 
 # Package Files #
-*.jar
-*.war
-*.ear
-*.res
-*.xml
-*.rapt
 #/Restaurant-war/dist/
 #/Restaurant-ejb/
 
