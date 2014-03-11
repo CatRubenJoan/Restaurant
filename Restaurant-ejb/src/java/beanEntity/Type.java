@@ -7,7 +7,6 @@ package beanEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -17,33 +16,24 @@ import javax.persistence.OneToMany;
  * @author cdi412
  */
 @Entity
-public class Statut implements Serializable {
+public class Type implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private String id;
-    @Column
-    private String infoStatut;
-    @OneToMany(mappedBy = "infoStatut")
-    private Collection<Produit> lesProduits;
+    private String infoType;
+    @OneToMany(mappedBy = "type")
+    private Collection<SousType> lesSousType;
 
-    public Statut() {
-        lesProduits = new ArrayList();
+    public Type() {
+        lesSousType = new ArrayList();
     }
 
-    public Statut(String id, String infoStatut) {
+    public Type(String id, String infoType) {
         this();
         this.id = id;
-        this.infoStatut = infoStatut;
+        this.infoType = infoType;
     }
 
-    public Collection<Produit> getLesProduits() {
-        return lesProduits;
-    }
-
-    public void setLesProduits(Collection<Produit> lesProduits) {
-        this.lesProduits = lesProduits;
-    }
-    
     public String getId() {
         return id;
     }
@@ -52,12 +42,20 @@ public class Statut implements Serializable {
         this.id = id;
     }
 
-    public String getInfoStatut() {
-        return infoStatut;
+    public String getInfoType() {
+        return infoType;
     }
 
-    public void setInfoStatut(String infoStatut) {
-        this.infoStatut = infoStatut;
+    public void setInfoType(String infoType) {
+        this.infoType = infoType;
+    }
+
+    public Collection<SousType> getLesSousType() {
+        return lesSousType;
+    }
+
+    public void setLesSousType(Collection<SousType> lesSousType) {
+        this.lesSousType = lesSousType;
     }
 
     @Override
@@ -70,10 +68,10 @@ public class Statut implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Statut)) {
+        if (!(object instanceof Type)) {
             return false;
         }
-        Statut other = (Statut) object;
+        Type other = (Type) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -82,7 +80,7 @@ public class Statut implements Serializable {
 
     @Override
     public String toString() {
-        return "beanEntity.Statut[ id=" + id + " ]";
+        return "beanEntity.Type[ id=" + id + " ]";
     }
     
 }

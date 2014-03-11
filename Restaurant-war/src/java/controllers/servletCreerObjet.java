@@ -4,7 +4,10 @@ import beanEntity.*;
 import beanSession.CommandeEnCoursLocal;
 import beanSession.EJBCuisinierLocal;
 import beanSession.EJBProduitLocal;
+import beanSession.EJBPromotionLocal;
+import beanSession.EJBSousTypeLocal;
 import beanSession.EJBStatutLocal;
+import beanSession.EJBTypeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -27,6 +30,12 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "servletCreerObjet", urlPatterns = {"/servletCreerObjet"})
 public class servletCreerObjet extends HttpServlet {
     @EJB
+    private EJBPromotionLocal eJBPromotion;
+    @EJB
+    private EJBSousTypeLocal eJBSousType;
+    @EJB
+    private EJBTypeLocal eJBType;
+    @EJB
     private EJBStatutLocal eJBStatut;
     @EJB
     private EJBProduitLocal eJBProduit;
@@ -34,7 +43,7 @@ public class servletCreerObjet extends HttpServlet {
     private EJBCuisinierLocal eJBCuisinier;
     @EJB
     private CommandeEnCoursLocal commandeEnCours;
-    
+
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -58,15 +67,26 @@ public class servletCreerObjet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet servletCreerObjet at " + request.getContextPath() + "</h1>");
-            
+
 //            out.println(commandeEnCours.creerCommandeBidon(new Date(), 3));
-            out.println( eJBCuisinier.creerCuisinier("1000", "Bouh"));
-            out.println( eJBCuisinier.creerCuisinier("1001", "Ratatouille"));
-            out.println( eJBProduit.creerProduit("3","Pate","Pate","52", "vieux", true, 12.30f));
-            out.println( eJBProduit.creerProduit("4","Steak","Viande","556", "carnivor", true, 15.30f));
+            out.println("Statut");
             eJBStatut.creerStatut();
-            out.println( eJBStatut.ajouterStatut("BOUH", "Bwwwwwwwwwwaaaaaaaaa"));
-            
+            out.println("<br>" + eJBStatut.ajouterStatut("BOUH", "Bwwwwwwwwwwaaaaaaaaa"));
+            out.println("<br>Type");
+            eJBType.creerType();
+            out.println("<br>Sous Type");
+            eJBSousType.creerSousType();
+            out.println("<br>Cuisinier");
+            out.println("<br>" + eJBCuisinier.creerCuisinier("1000", "Bouh"));
+            out.println("<br>" + eJBCuisinier.creerCuisinier("1001", "Ratatouille"));
+            out.println("<br>Promotion");
+            eJBPromotion.creerPromotion(10f, new Date(), new Date());
+            out.println("<br>Produit");
+            out.println("<br>" + eJBProduit.creerProduit("3", "Pate", "Pate", "52", "vieux", true, 12.30f, "PAT"));
+            out.println("<br>" + eJBProduit.creerProduit("4", "Steak", "Viande", "556", "carnivor", true, 15.30f, "VIA"));
+            out.println("<br>Attribuer un cuisinier");
+            out.println("<br>" + eJBProduit.attribuerCuisinier("4", "1000"));
+
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -117,5 +137,4 @@ public class servletCreerObjet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

@@ -5,6 +5,7 @@
 package beanEntity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,22 +18,33 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Cuisinier implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     private String codeIHM;
     @Column(nullable = false)
     private String nom;
+    @OneToMany(mappedBy = "cuisto")
+    private Collection<Produit> lesProduits;
 
-    //    private Collection<Produit>
-    
     public Cuisinier() {
-    }    
-    
+        lesProduits = new ArrayList();
+    }
+
     public Cuisinier(String codeIHM, String nom) {
+        this();
         this.codeIHM = codeIHM;
         this.nom = nom;
     }
-    
+
+    public Collection<Produit> getLesProduits() {
+        return lesProduits;
+    }
+
+    public void setLesProduits(Collection<Produit> lesProduits) {
+        this.lesProduits = lesProduits;
+    }
+
     public String getCodeIHM() {
         return codeIHM;
     }
@@ -47,7 +59,7 @@ public class Cuisinier implements Serializable {
 
     public void setNom(String nom) {
         this.nom = nom;
-    }   
+    }
 
     @Override
     public int hashCode() {
@@ -73,5 +85,4 @@ public class Cuisinier implements Serializable {
     public String toString() {
         return "beanEntity.Cuisinier[ id=" + codeIHM + " ]";
     }
-    
 }

@@ -8,6 +8,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -15,21 +17,35 @@ import javax.persistence.Id;
  */
 @Entity
 public class Produit implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     private String reference;
     @Column
-    String nom;
-    String composition;
-    String qualiteNutritive;
-    String historique;
-    boolean disponibilite;
-    float prixHt;
+    private String nom;
+    private String composition;
+    private String qualiteNutritive;
+    private String historique;
+    private boolean disponibilite;
+    private float prixHt;
+    @ManyToOne
+    private Statut infoStatut;
+    @ManyToOne
+    @JoinColumn(name = "cuisinier_ID", nullable = true)
+    private Cuisinier cuisto;
+    @ManyToOne
+    @JoinColumn(name = "promo_ID", nullable = true)
+    private Promotion promo;
+    @ManyToOne
+    private SousType sousType;
 
     public Produit() {
+        infoStatut = new Statut("AUCUN", "Aucun");
+        cuisto = null;
     }
-    
+
     public Produit(String nom, String composition, String qualiteNutritive, String historique, boolean disponibilite, float prixHt) {
+        this();
         this.nom = nom;
         this.composition = composition;
         this.qualiteNutritive = qualiteNutritive;
@@ -38,7 +54,8 @@ public class Produit implements Serializable {
         this.prixHt = prixHt;
     }
 
-    public Produit(String reference, String nom, String composition, String qualiteNutritive, String historique, boolean disponibilite, float prixHt) {
+    public Produit(String reference, String nom, String composition, String qualiteNutritive, String historique, boolean disponibilite, float prixHt, SousType sousType) {
+        this();
         this.reference = reference;
         this.nom = nom;
         this.composition = composition;
@@ -46,8 +63,27 @@ public class Produit implements Serializable {
         this.historique = historique;
         this.disponibilite = disponibilite;
         this.prixHt = prixHt;
+        this.sousType = sousType;
     }
+
     
+
+    public Cuisinier getCuisto() {
+        return cuisto;
+    }
+
+    public void setCuisto(Cuisinier cuisto) {
+        this.cuisto = cuisto;
+    }
+
+    public Statut getInfoStatut() {
+        return infoStatut;
+    }
+
+    public void setInfoStatut(Statut infoStatut) {
+        this.infoStatut = infoStatut;
+    }
+
     public String getReference() {
         return reference;
     }
@@ -128,5 +164,4 @@ public class Produit implements Serializable {
     public String toString() {
         return "beanEntity.Produit[ ref=" + reference + " ]";
     }
-    
 }
