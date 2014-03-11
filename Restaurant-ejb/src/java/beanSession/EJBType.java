@@ -65,19 +65,6 @@ public class EJBType implements EJBTypeLocal {
     }
 
     @Override
-    public boolean modifierType(Type t, String lib) {
-        boolean test = false;
-
-        if (em.find(Type.class, t.getId()) != null) {
-            Type t1 = em.find(Type.class, t.getId());
-            t1.setInfoType(lib);
-            em.merge(t1);
-            test = true;
-        }
-        return test;
-    }
-
-    @Override
     public boolean supprimerType(String id) {
         boolean test = false;
 
@@ -89,15 +76,8 @@ public class EJBType implements EJBTypeLocal {
         return test;
     }
 
-    @Override
-    public boolean supprimerType(Type t) {
-        boolean test = false;
-
-        if (em.find(Type.class, t.getId()) != null) {
-            Type t1 = em.find(Type.class, t.getId());
-            em.remove(t1);
-            test = true;
-        }
-        return test;
-    }
+//    @Override
+//    public Type unType(String id) {
+//        
+//    }
 }

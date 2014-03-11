@@ -27,13 +27,11 @@ public class EJBSousType implements EJBSousTypeLocal {
             if (em.find(SousType.class, "ENTFR") == null) {
                 SousType entFr = new SousType("ENTFR", "Entrées Froides", entree);
                 entree.getLesSousType().add(entFr);
-                em.merge(entree);
                 em.persist(entFr);
             }
             if (em.find(SousType.class, "ENTCH") == null) {
                 SousType entCh = new SousType("ENTCH", "Entrées Chaudes", entree);
                 entree.getLesSousType().add(entCh);
-                em.merge(entree);
                 em.persist(entCh);
             }
         }
@@ -42,19 +40,16 @@ public class EJBSousType implements EJBSousTypeLocal {
             if (em.find(SousType.class, "POI") == null) {
                 SousType poi = new SousType("POI", "Poissons", plat);
                 plat.getLesSousType().add(poi);
-                em.merge(plat);
                 em.persist(poi);
             }
             if (em.find(SousType.class, "VIA") == null) {
                 SousType via = new SousType("VIA", "Viandes", plat);
                 plat.getLesSousType().add(via);
-                em.merge(plat);
                 em.persist(via);
             }
             if (em.find(SousType.class, "PAT") == null) {
                 SousType pat = new SousType("PAT", "Pâte", plat);
                 plat.getLesSousType().add(pat);
-                em.merge(plat);
                 em.persist(pat);
             }
         }
@@ -63,13 +58,11 @@ public class EJBSousType implements EJBSousTypeLocal {
             if (em.find(SousType.class, "TAR") == null) {
                 SousType tar = new SousType("TAR", "Tartes", des);
                 des.getLesSousType().add(tar);
-                em.merge(des);
                 em.persist(tar);
             }
             if (em.find(SousType.class, "GLA") == null) {
                 SousType gla = new SousType("GLA", "Glaces", des);
                 des.getLesSousType().add(gla);
-                em.merge(des);
                 em.persist(gla);
             }
         }
@@ -78,48 +71,66 @@ public class EJBSousType implements EJBSousTypeLocal {
             if (em.find(SousType.class, "VIN") == null) {
                 SousType vin = new SousType("VIN", "Vins", boi);
                 boi.getLesSousType().add(vin);
-                em.merge(boi);
                 em.persist(vin);
             }
             if (em.find(SousType.class, "COCK") == null) {
                 SousType cock = new SousType("COCK", "Cocktail", boi);
                 boi.getLesSousType().add(cock);
-                em.merge(boi);
                 em.persist(cock);
             }
         }
     }
 
     @Override
-    public boolean ajouterSousType(String id, String lib, Type tp) {
+    public boolean ajouterSousType(String id, String lib, String type) {
         boolean test = false;
 
-        if (em.find(Type.class, tp.getId()) == null) {
-            Type t = em.find(Type.class, tp.getId());
+        if (em.find(Type.class, type) != null) {
+            Type t = em.find(Type.class, type);
             if (em.find(SousType.class, id) == null) {
                 SousType st1 = new SousType(id, lib, t);
                 t.getLesSousType().add(st1);
-                em.merge(t);
                 em.persist(st1);
                 test = true;
             }
         }
         return test;
     }
+
     @Override
-    public boolean ajouterSousType(String id, String lib, String type) {
+    public boolean modifierSousType(String id, String lib) {
         boolean test = false;
 
-        if (em.find(Type.class, type) == null) {
+        if (em.find(SousType.class, id) != null) {
+            SousType s1 = em.find(SousType.class, id);
+            s1.setInfoSousType(lib);
+            em.merge(s1);
+            test = true;
+        }
+        return test;
+    }
+
+    @Override
+    public boolean modifierSousType(String id, String lib, String type) {
+        boolean test = false;
+        if (em.find(Type.class, type) != null) {
             Type t = em.find(Type.class, type);
-            if (em.find(SousType.class, id) == null) {
-                SousType st1 = new SousType(id, lib, t);
-                t.getLesSousType().add(st1);
-                em.merge(t);
-                em.persist(st1);
+            if (em.find(SousType.class, id) != null) {
+                SousType s1 = em.find(SousType.class, id);
+                s1.setInfoSousType(lib);
+                
+                s1.getType().getLesSousType().remove(s1);
+                t.getLesSousType().add(s1);
+                
+                em.merge(s1);
                 test = true;
             }
         }
         return test;
+    }
+
+    @Override
+    public boolean supprimerSousType(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

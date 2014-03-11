@@ -15,9 +15,8 @@ import javax.ejb.Local;
  */
 @Local
 public interface EJBProduitLocal {
-    public Produit creerProduit(String nom, String composition, String qualiteNutritive, String historique, boolean disponibilite, float prixHt, SousType sousType);
     public Produit creerProduit(String nom, String composition, String qualiteNutritive, String historique, boolean disponibilite, float prixHt, String sousTypeId);
-    public boolean attribuerCuisinier(String prod, String cuisi);
-    public boolean attribuerPromotion(String prod, int promo);
+    public boolean attribuerCuisinier(int prod, String cuisi);
+    public boolean attribuerPromotion(int prod, int promo);
     public boolean attribuerPromotion(ArrayList<Produit> prod, int promo);
 }
