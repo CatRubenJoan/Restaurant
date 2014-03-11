@@ -1,24 +1,26 @@
 *.class
+*.rapt
+
 
 # Package Files #
 #/Restaurant-war/dist/
 #/Restaurant-ejb/
 
-src/
-build/
-dist/
-nbproject/
+/src/*
+/build/*
+/dist/*
+/nbproject/*
 
-Restaurant-ejb/build/
-Restaurant-ejb/dist/
-Restaurant-ejb/nbproject/
-Restaurant-ejb/setup/
-Restaurant-ejb/src/conf/
+/Restaurant-ejb/build/*
+/Restaurant-ejb/dist/*
+/Restaurant-ejb/nbproject/*
+/Restaurant-ejb/setup/*
+/Restaurant-ejb/src/conf/*
 
-Restaurant-war/build/
-Restaurant-war/dist/
-Restaurant-war/nbproject/
-Restaurant-war/src/conf/
+/Restaurant-war/build/*
+/Restaurant-war/dist/*
+/Restaurant-war/nbproject/*
+/Restaurant-war/src/conf/*
 
 
 
