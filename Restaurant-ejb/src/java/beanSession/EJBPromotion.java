@@ -21,8 +21,9 @@ public class EJBPromotion implements EJBPromotionLocal {
     EntityManager em;
 
     @Override
-    public void creerPromotion(float taux, Date dateDebut, Date dateFin) {
+    public Promotion creerPromotion(float taux, Date dateDebut, Date dateFin) {
         Promotion p1 = new Promotion(taux, dateDebut, dateFin);
         em.persist(p1);
+        return p1;
     }
 }

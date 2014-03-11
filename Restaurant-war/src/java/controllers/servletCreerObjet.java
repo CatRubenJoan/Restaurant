@@ -1,6 +1,5 @@
 package controllers;
 
-import beanEntity.*;
 import beanSession.CommandeEnCoursLocal;
 import beanSession.EJBCuisinierLocal;
 import beanSession.EJBProduitLocal;
@@ -11,16 +10,7 @@ import beanSession.EJBTypeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -58,6 +48,9 @@ public class servletCreerObjet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        int idPromo = 0;
+        int p1 = 0;
+        int p2 = 0;
         try {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -80,12 +73,17 @@ public class servletCreerObjet extends HttpServlet {
             out.println("<br>" + eJBCuisinier.creerCuisinier("1000", "Bouh"));
             out.println("<br>" + eJBCuisinier.creerCuisinier("1001", "Ratatouille"));
             out.println("<br>Promotion");
-            eJBPromotion.creerPromotion(10f, new Date(), new Date());
+            idPromo = eJBPromotion.creerPromotion(10f, new Date(), new Date()).getId();
+            out.println("<br>"+idPromo);
             out.println("<br>Produit");
-            out.println("<br>" + eJBProduit.creerProduit("3", "Pate", "Pate", "52", "vieux", true, 12.30f, "PAT"));
-            out.println("<br>" + eJBProduit.creerProduit("4", "Steak", "Viande", "556", "carnivor", true, 15.30f, "VIA"));
+            p1 = eJBProduit.creerProduit("Pate", "Pate", "52", "vieux", true, 12.30f, "PAT").getReference();
+            p2 = eJBProduit.creerProduit("Steak", "Viande", "556", "carnivor", true, 15.30f, "VIA").getReference();
+            out.println("<br>" + p1);
+            out.println("<br>" + p2);
             out.println("<br>Attribuer un cuisinier");
-            out.println("<br>" + eJBProduit.attribuerCuisinier("4", "1000"));
+            out.println("<br>" + eJBProduit.attribuerCuisinier(Integer.toString(p2), "1000"));
+            out.println("<br>Attribuer une promotion");
+            out.println("<br>" + eJBProduit.attribuerPromotion(Integer.toString(p1), idPromo));
 
             out.println("</body>");
             out.println("</html>");

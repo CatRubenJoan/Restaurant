@@ -4,6 +4,7 @@
  */
 package beanSession;
 
+import beanEntity.Promotion;
 import java.util.Date;
 import javax.ejb.Local;
 
@@ -13,5 +14,5 @@ import javax.ejb.Local;
  */
 @Local
 public interface EJBPromotionLocal {
-    public void creerPromotion(float taux, Date dateDebut, Date dateFin);
+    public Promotion creerPromotion(float taux, Date dateDebut, Date dateFin);
 }

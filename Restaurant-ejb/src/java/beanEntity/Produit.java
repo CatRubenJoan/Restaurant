@@ -7,6 +7,8 @@ package beanEntity;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,7 +22,8 @@ public class Produit implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    private String reference;
+    @ GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer reference;
     @Column
     private String nom;
     private String composition;
@@ -42,21 +45,11 @@ public class Produit implements Serializable {
     public Produit() {
         infoStatut = new Statut("AUCUN", "Aucun");
         cuisto = null;
+        promo = null;
     }
 
-    public Produit(String nom, String composition, String qualiteNutritive, String historique, boolean disponibilite, float prixHt) {
+    public Produit(String nom, String composition, String qualiteNutritive, String historique, boolean disponibilite, float prixHt, SousType sousType) {
         this();
-        this.nom = nom;
-        this.composition = composition;
-        this.qualiteNutritive = qualiteNutritive;
-        this.historique = historique;
-        this.disponibilite = disponibilite;
-        this.prixHt = prixHt;
-    }
-
-    public Produit(String reference, String nom, String composition, String qualiteNutritive, String historique, boolean disponibilite, float prixHt, SousType sousType) {
-        this();
-        this.reference = reference;
         this.nom = nom;
         this.composition = composition;
         this.qualiteNutritive = qualiteNutritive;
@@ -66,7 +59,21 @@ public class Produit implements Serializable {
         this.sousType = sousType;
     }
 
-    
+    public Promotion getPromo() {
+        return promo;
+    }
+
+    public void setPromo(Promotion promo) {
+        this.promo = promo;
+    }
+
+    public SousType getSousType() {
+        return sousType;
+    }
+
+    public void setSousType(SousType sousType) {
+        this.sousType = sousType;
+    }
 
     public Cuisinier getCuisto() {
         return cuisto;
@@ -84,11 +91,11 @@ public class Produit implements Serializable {
         this.infoStatut = infoStatut;
     }
 
-    public String getReference() {
+    public int getReference() {
         return reference;
     }
 
-    public void setReference(String ref) {
+    public void setReference(int ref) {
         this.reference = ref;
     }
 
