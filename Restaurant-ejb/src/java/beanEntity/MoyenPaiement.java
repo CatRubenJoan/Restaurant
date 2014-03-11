@@ -11,38 +11,39 @@ public class MoyenPaiement implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String codePaiement;
     private String typePaiement;
 
     public MoyenPaiement() {
     }
 
-    public MoyenPaiement(String typePaiement) {
+    public MoyenPaiement(String codePaiement, String typePaiement) {
+        this.codePaiement = codePaiement;
         this.typePaiement = typePaiement;
     }
 
-//    public MoyenPaiement(Long id, String typePaiement) {
-//        this.id = id;
-//        this.typePaiement = typePaiement;
-//    }
-   
     
-    
-       
-    
-    public Long getId() {
-        return id;
+       public String getTypePaiement() {
+        return typePaiement;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setTypePaiement(String typePaiement) {
+        this.typePaiement = typePaiement;
+    }
+       
+    
+    public String getCodePaiement() {
+        return codePaiement;
+    }
+
+    public void setCodePaiement(String codePaiement) {
+        this.codePaiement = codePaiement;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (codePaiement != null ? codePaiement.hashCode() : 0);
         return hash;
     }
 
@@ -53,7 +54,7 @@ public class MoyenPaiement implements Serializable {
             return false;
         }
         MoyenPaiement other = (MoyenPaiement) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.codePaiement == null && other.codePaiement != null) || (this.codePaiement != null && !this.codePaiement.equals(other.codePaiement))) {
             return false;
         }
         return true;
@@ -61,14 +62,8 @@ public class MoyenPaiement implements Serializable {
 
     @Override
     public String toString() {
-        return "beanEntity.MoyenPaiement[ id=" + id + " ]";
+        return "codePaiement: " + codePaiement;
     }
 
-    public String getTypePaiement() {
-        return typePaiement;
-    }
 
-    public void setTypePaiement(String typePaiement) {
-        this.typePaiement = typePaiement;
-    }
 }

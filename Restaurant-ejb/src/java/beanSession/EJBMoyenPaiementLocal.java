@@ -6,5 +6,6 @@ import javax.ejb.Local;
 
 @Local
 public interface EJBMoyenPaiementLocal {
-    public boolean creerMoyenPaiement( String typePaiement);
+    public void creerMoyenPaiement();
+    public boolean ajouterMoyenPaiement(String codePaiement, String typePaiement);
 }

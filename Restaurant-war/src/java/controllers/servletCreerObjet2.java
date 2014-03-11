@@ -1,18 +1,29 @@
 package controllers;
 
+<<<<<<< HEAD
 import beanEntity.Produit;
 import beanEntity.SousType;
+=======
+import beanEntity.*;
+>>>>>>> c6291bcaa10c7d6ea8ebf75122c82933a4a08999
 import beanSession.CommandeEnCoursLocal;
 import beanSession.EJBCuisinierLocal;
+import beanSession.EJBMoyenPaiementLocal;
 import beanSession.EJBProduitLocal;
-import beanSession.EJBPromotionLocal;
-import beanSession.EJBSousTypeLocal;
 import beanSession.EJBStatutLocal;
-import beanSession.EJBTypeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,12 +34,6 @@ import javax.servlet.http.HttpServletResponse;
 public class servletCreerObjet extends HttpServlet {
 
     @EJB
-    private EJBPromotionLocal eJBPromotion;
-    @EJB
-    private EJBSousTypeLocal eJBSousType;
-    @EJB
-    private EJBTypeLocal eJBType;
-    @EJB
     private EJBStatutLocal eJBStatut;
     @EJB
     private EJBProduitLocal eJBProduit;
@@ -36,7 +41,9 @@ public class servletCreerObjet extends HttpServlet {
     private EJBCuisinierLocal eJBCuisinier;
     @EJB
     private CommandeEnCoursLocal commandeEnCours;
-
+    @EJB
+    private EJBMoyenPaiementLocal moyenPaiement;
+    
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -51,9 +58,6 @@ public class servletCreerObjet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        int idPromo = 0;
-        int p1 = 0;
-        int p2 = 0;
         try {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -63,10 +67,14 @@ public class servletCreerObjet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet servletCreerObjet at " + request.getContextPath() + "</h1>");
-
+            
 //            out.println(commandeEnCours.creerCommandeBidon(new Date(), 3));
-            out.println("Statut");
+            out.println( eJBCuisinier.creerCuisinier("1000", "Bouh"));
+            out.println( eJBCuisinier.creerCuisinier("1001", "Ratatouille"));
+            out.println( eJBProduit.creerProduit("3","Pate","Pate","52", "vieux", true, 12.30f));
+            out.println( eJBProduit.creerProduit("4","Steak","Viande","556", "carnivor", true, 15.30f));
             eJBStatut.creerStatut();
+<<<<<<< HEAD
             out.println("<br>" + eJBStatut.ajouterStatut("BOUH", "Bwwwwwwwwwwaaaaaaaaa"));
             out.println("<br>Type");
             eJBType.creerType();
@@ -98,6 +106,15 @@ public class servletCreerObjet extends HttpServlet {
 //            }
 
 
+=======
+            out.println( eJBStatut.ajouterStatut("BOUH", "Bwwwwwwwwwwaaaaaaaaa"));
+         
+            moyenPaiement.creerMoyenPaiement();
+            
+            out.println(moyenPaiement.ajouterMoyenPaiement("ES","espèce"));
+            out.println(moyenPaiement.ajouterMoyenPaiement("NA","nature"));
+            
+>>>>>>> c6291bcaa10c7d6ea8ebf75122c82933a4a08999
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -145,4 +162,5 @@ public class servletCreerObjet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }
