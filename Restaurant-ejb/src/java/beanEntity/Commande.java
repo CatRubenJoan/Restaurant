@@ -25,9 +25,12 @@ public class Commande implements Serializable {
     private Emplacement table; 
     @ OneToMany(mappedBy = "commandeReglee")
     private Collection<Paiement> paiements;
-
+    @ OneToMany//(mappedBy = "commande")
+    private Collection<LigneCommande>lignesCommande;
+    
     public Commande() {
         paiements = new ArrayList<>();
+        lignesCommande = new ArrayList<>();
     }
 
     public Commande(int numCommande, Date dateHeure, int nbPersonne) {
@@ -79,6 +82,14 @@ public class Commande implements Serializable {
 
     public void setPaiements(Collection<Paiement> paiements) {
         this.paiements = paiements;
+    }
+
+    public Collection<LigneCommande> getLignesCommande() {
+        return lignesCommande;
+    }
+
+    public void setLignesCommande(Collection<LigneCommande> lignesCommande) {
+        this.lignesCommande = lignesCommande;
     }
 
     @Override

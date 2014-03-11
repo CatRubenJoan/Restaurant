@@ -1,6 +1,5 @@
 package beanSession;
 
-import beanEntity.Commande;
 import java.util.Date;
 import javax.ejb.Local;
 
@@ -16,4 +15,6 @@ public interface CommandeEnCoursLocal {
     public boolean creerServeur(String codeIHM, String nom);
 
     public boolean creerTableWServeur(int capacite, String codeIHM, String noServeur);
+
+    public float reglementCommande(int noCommandeARegler, int montant);
 }
