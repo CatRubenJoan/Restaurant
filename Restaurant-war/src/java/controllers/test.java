@@ -1,42 +1,30 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controllers;
 
-import beanEntity.*;
-import beanSession.CommandeEnCoursLocal;
-import beanSession.EJBCuisinierLocal;
 import beanSession.EJBMoyenPaiementLocal;
-import beanSession.EJBProduitLocal;
-import beanSession.EJBStatutLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "servletCreerObjet", urlPatterns = {"/servletCreerObjet"})
-public class servletCreerObjet extends HttpServlet {
-    @EJB
-    private EJBStatutLocal eJBStatut;
-    @EJB
-    private EJBProduitLocal eJBProduit;
-    @EJB
-    private EJBCuisinierLocal eJBCuisinier;
-    @EJB
-    private CommandeEnCoursLocal commandeEnCours;
+/**
+ *
+ * @author cdi402
+ */
+@WebServlet(name = "test", urlPatterns = {"/test"})
+public class test extends HttpServlet {
+
     @EJB
     private EJBMoyenPaiementLocal moyenPaiement;
+    
+    
     
     /**
      * Processes requests for both HTTP
@@ -57,32 +45,17 @@ public class servletCreerObjet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet servletCreerObjet</title>");
+            out.println("<title>Servlet test</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet servletCreerObjet at " + request.getContextPath() + "</h1>");
-            
-//            out.println(commandeEnCours.creerCommandeBidon(new Date(), 3));
-            out.println( eJBCuisinier.creerCuisinier("1000", "Bouh"));
-            out.println( eJBCuisinier.creerCuisinier("1001", "Ratatouille"));
-            out.println( eJBProduit.creerProduit("3","Pate","Pate","52", "vieux", true, 12.30f));
-            out.println( eJBProduit.creerProduit("4","Steak","Viande","556", "carnivor", true, 15.30f));
-            eJBStatut.creerStatut();
-            out.println( eJBStatut.ajouterStatut("BOUH", "Bwwwwwwwwwwaaaaaaaaa"));
-         
-            moyenPaiement.creerMoyenPaiement();
-            
-            out.println(moyenPaiement.ajouterMoyenPaiement("ES","espèce"));
-            out.println(moyenPaiement.ajouterMoyenPaiement("NA","nature"));
-            
+            out.println("HELLO");
+            out.println(moyenPaiement.ajouterMoyenPaiement("CB","carte bleue"));
+            out.println("<h1>Servlet test at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        } finally {
+        } finally {            
             out.close();
         }
-    }
-
-    public servletCreerObjet() {
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -125,5 +98,4 @@ public class servletCreerObjet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
