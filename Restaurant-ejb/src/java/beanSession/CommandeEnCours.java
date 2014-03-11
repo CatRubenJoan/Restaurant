@@ -2,6 +2,8 @@ package beanSession;
 
 import beanEntity.Commande;
 import beanEntity.Emplacement;
+import beanEntity.LigneCommande;
+import beanEntity.Produit;
 import beanEntity.Serveur;
 import java.util.Date;
 import javax.ejb.Stateless;
@@ -54,6 +56,21 @@ public class CommandeEnCours implements CommandeEnCoursLocal {
         em.persist(c);
         return true;
     }
+    
+    @Override
+    public boolean ajouterProduit(int noCommande, Integer noProduit, int qte, String commentaire){
+        
+        LigneCommande lc = new LigneCommande(qte, commentaire);        
+        
+        lc.setCommande(em.find(Commande.class, noCommande));
+        
+        lc.setProduit(em.find(Produit.class, noProduit));
+        
+        lc.setPrixHTLC((lc.getProduit().getPrixHt())*lc.getQte());
+                
+        return true;
+    }
+    
     
     @Override
     public float reglementCommande(int noCommandeARegler, int montant){

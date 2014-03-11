@@ -18,9 +18,15 @@ public class LigneCommande implements Serializable {
     private String commentaire;
     @ManyToOne
     private Commande commande;
-    
+    @ManyToOne
+    private Produit produit;
 
     public LigneCommande() {
+    }
+
+    public LigneCommande(int qte, String commentaire) {
+        this.qte = qte;
+        this.commentaire = commentaire;
     }
 
     public LigneCommande(int qte, float prixHTLC, String commentaire) {
@@ -67,6 +73,14 @@ public class LigneCommande implements Serializable {
 
     public void setCommande(Commande commande) {
         this.commande = commande;
+    }
+
+    public Produit getProduit() {
+        return produit;
+    }
+
+    public void setProduit(Produit produit) {
+        this.produit = produit;
     }
 
     @Override
