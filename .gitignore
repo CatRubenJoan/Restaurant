@@ -4,17 +4,29 @@
 *.jar
 *.war
 *.ear
+*.res
+*.xml
+*.rapt
 #/Restaurant-war/dist/
+#/Restaurant-ejb/
+
+src/
 build/
 dist/
 nbproject/
 
-Restaurant-war/*
-!/Restaurant-war/src/java
-!/Restaurant-war/web
+Restaurant-ejb/build/
+Restaurant-ejb/dist/
+Restaurant-ejb/nbproject/
+Restaurant-ejb/setup/
+Restaurant-ejb/src/conf/
 
-Restaurant-ejb/*
-!/Restaurant-ejb/src
+Restaurant-war/build/
+Restaurant-war/dist/
+Restaurant-war/nbproject/
+Restaurant-war/src/conf/
 
 
-#/Restaurant-ejb/
+
+
+

@@ -55,8 +55,9 @@ public class CommandeEnCours implements CommandeEnCoursLocal {
         return true;
     }
     
-    public float reglementCommande(){
+    public float reglementCommande(int noCommandeARegler){
         
+//        Commande aRegler = em.find
         return 0f;
     }
     
