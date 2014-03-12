@@ -26,7 +26,7 @@ public class Paiement implements Serializable {
     }
 
     public Paiement(String nomClient, float montantParMoyenTTC, Date dateHeure, Commande commandeReglee) {
-        this.nomClient = nomClient;
+//        this.nomClient = nomClient;
         this.montantParMoyenTTC = montantParMoyenTTC;
         this.dateHeure = dateHeure;
         this.commandeReglee = commandeReglee;
