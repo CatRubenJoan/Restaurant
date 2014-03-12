@@ -25,7 +25,7 @@ public class Commande implements Serializable {
     private Emplacement table; 
     @ OneToMany(mappedBy = "commandeReglee")
     private Collection<Paiement> paiements;
-    @ OneToMany//(mappedBy = "commande")
+    @ OneToMany(mappedBy = "commande")
     private Collection<LigneCommande>lignesCommande;
     
     public Commande() {

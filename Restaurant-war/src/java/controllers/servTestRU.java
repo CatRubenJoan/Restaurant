@@ -1,6 +1,9 @@
 package controllers;
 
 import beanSession.CommandeEnCoursLocal;
+import beanSession.EJBProduitLocal;
+import beanSession.EJBSousTypeLocal;
+import beanSession.EJBTypeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -14,7 +17,13 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "servTestRU", urlPatterns = {"/servTestRU"})
 public class servTestRU extends HttpServlet {
+    @EJB
+    private EJBSousTypeLocal eJBSousType;
+    @EJB
+    private EJBTypeLocal eJBType;
 
+    @EJB
+    private EJBProduitLocal eJBProduit;
     @EJB
     private CommandeEnCoursLocal commandeEnCours;
 
@@ -30,26 +39,26 @@ public class servTestRU extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet servTestRU at " + request.getContextPath() + "</h1>");
-            
+
             out.println("<p>");
-            out.println(commandeEnCours.creerServeur("1000", "Chuck Norris")); 
-            out.println(commandeEnCours.creerServeur("1001", "Ludwig van Beethoven")); 
-            out.println("<strong>creer serveurs DONE</strong>");   
+            out.println(commandeEnCours.creerServeur("1000", "Chuck Norris"));
+            out.println(commandeEnCours.creerServeur("1001", "Ludwig van Beethoven"));
+            out.println("<strong>creer serveurs DONE</strong>");
             out.println("</p>");
-                        
+
             out.println("<p>");
-            out.println(commandeEnCours.creerTableWServeur(2, "0001", "1001"));            
-            out.println(commandeEnCours.creerTableWServeur(4, "0002", "1000"));  
-            out.println(commandeEnCours.creerTableWServeur(8, "0003", "1000"));  
+            out.println(commandeEnCours.creerTableWServeur(2, "0001", "1001"));
+            out.println(commandeEnCours.creerTableWServeur(4, "0002", "1000"));
+            out.println(commandeEnCours.creerTableWServeur(8, "0003", "1000"));
             out.println("<strong>creer tables DONE</strong>");
             out.println("</p>");
-            
+
             out.println("<p>");
             //public boolean creerCommandeBidonWTable(Date dateHeure, int nbPersonne, int noTable)
             out.println(commandeEnCours.creerCommandeBidonWTable(new GregorianCalendar(2012, 11, 10, 11, 57, 05).getTime(), 2, 1));
             out.println(commandeEnCours.creerCommandeBidonWTable(new Date(), 2, 1));
             out.println(commandeEnCours.creerCommandeBidonWTable(new Date(), 1, 1));
-            out.println(commandeEnCours.creerCommandeBidonWTable(new Date(), 3, 2));            
+            out.println(commandeEnCours.creerCommandeBidonWTable(new Date(), 3, 2));
             out.println(commandeEnCours.creerCommandeBidonWTable(new Date(), 4, 2));
             out.println(commandeEnCours.creerCommandeBidonWTable(new Date(), 2, 2));
             out.println(commandeEnCours.creerCommandeBidonWTable(new Date(), 3, 2));
@@ -59,11 +68,24 @@ public class servTestRU extends HttpServlet {
             out.println("</p>");
 
             out.println("<p>");
+            eJBType.creerType();
+            eJBSousType.creerSousType();
+            out.println("<strong>creer sous-type DONE</strong>");
+            out.println("</p>");
+            
+            out.println("<p>");
+            out.println(eJBProduit.creerProduit("Chilled monkey brains", "Cervelle de singe en sorbet", "400 cal", "Recette traditionnelle", true, 15.3f, "ENTFR"));
+            out.println(eJBProduit.creerProduit("Snake surprise", "Serpent surprise", "150 cal", "Recette traditionnelle", true, 16.8f, "ENTCH"));
+            out.println("<strong>creer produits DONE</strong>");
+            out.println("</p>");
+
+
+            out.println("<p>");
             //public float reglementCommande(int noCommandeARegler, int montant)
             out.println(commandeEnCours.reglementCommande(1, 17));
-            out.println("<strong>creer paiements DONE</strong>");   
-            out.println("</p>");            
-            
+            out.println("<strong>creer paiements DONE</strong>");
+            out.println("</p>");
+
             out.println("</body>");
             out.println("</html>");
         } finally {
