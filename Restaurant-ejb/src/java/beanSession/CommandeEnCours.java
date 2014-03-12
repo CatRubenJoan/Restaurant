@@ -5,6 +5,8 @@ import beanEntity.Emplacement;
 import beanEntity.LigneCommande;
 import beanEntity.Produit;
 import beanEntity.Serveur;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -26,7 +28,11 @@ public class CommandeEnCours implements CommandeEnCoursLocal {
     @Override
     public boolean creerTableWServeur(int capacite, String codeIHM, String noServeur) {
         Emplacement emp = new Emplacement(capacite, codeIHM);
-        emp.setServeur(em.find(Serveur.class, noServeur));
+        Serveur ser = em.find(Serveur.class, noServeur);
+        emp.setServeur(ser);
+//        Collection<Emplacement> al = new ArrayList<>();
+//        al.add(emp);
+//        ser.setTables(al);
         em.persist(emp);
         return true;
     }

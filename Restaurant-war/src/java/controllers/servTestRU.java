@@ -1,8 +1,10 @@
 package controllers;
 
+import beanEntity.SousType;
 import beanSession.CommandeEnCoursLocal;
 import beanSession.EJBProduitLocal;
 import beanSession.EJBSousTypeLocal;
+import beanSession.EJBStatutLocal;
 import beanSession.EJBTypeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,10 +20,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "servTestRU", urlPatterns = {"/servTestRU"})
 public class servTestRU extends HttpServlet {
     @EJB
+    private EJBStatutLocal eJBStatut;
+    @EJB
     private EJBSousTypeLocal eJBSousType;
     @EJB
     private EJBTypeLocal eJBType;
-
     @EJB
     private EJBProduitLocal eJBProduit;
     @EJB
@@ -68,24 +71,28 @@ public class servTestRU extends HttpServlet {
             out.println("</p>");
 
             out.println("<p>");
+            eJBStatut.creerStatut();
             eJBType.creerType();
             eJBSousType.creerSousType();
-            out.println("<strong>creer sous-type DONE</strong>");
+            out.println("<strong>creer statut, sous-type et type DONE</strong>");
             out.println("</p>");
             
             out.println("<p>");
-            out.println(eJBProduit.creerProduit("Chilled monkey brains", "Cervelle de singe en sorbet", "400 cal", "Recette traditionnelle", true, 15.3f, "ENTFR"));
+            out.println(eJBProduit.creerProduit("Chilled monkey brain", "Cervelle de singe en sorbet", "400 cal", "Recette traditionnelle", true, 15.3f, "ENTFR"));
             out.println(eJBProduit.creerProduit("Snake surprise", "Serpent surprise", "150 cal", "Recette traditionnelle", true, 16.8f, "ENTCH"));
             out.println("<strong>creer produits DONE</strong>");
             out.println("</p>");
+//
+//
+//            out.println("<p>");
+//            //public float reglementCommande(int noCommandeARegler, int montant)
+//            out.println(commandeEnCours.reglementCommande(1, 17));
+//            out.println("<strong>creer paiements DONE</strong>");
+//            out.println("</p>");
 
-
-            out.println("<p>");
-            //public float reglementCommande(int noCommandeARegler, int montant)
-            out.println(commandeEnCours.reglementCommande(1, 17));
-            out.println("<strong>creer paiements DONE</strong>");
-            out.println("</p>");
-
+            
+            out.println("bazinga");
+            out.println("<p>me piace</p>");
             out.println("</body>");
             out.println("</html>");
         } finally {

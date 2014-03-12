@@ -28,11 +28,13 @@ public class Emplacement implements Serializable {
     }
 
     public Emplacement(int capacite, String codeIHM) {
+        this();
         this.capacite = capacite;
         this.codeIHM = codeIHM;
     }
 
     public Emplacement(int numero, int capacite, String codeIHM) {
+        this();
         this.numero = numero;
         this.capacite = capacite;
         this.codeIHM = codeIHM;

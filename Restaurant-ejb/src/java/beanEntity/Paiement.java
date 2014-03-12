@@ -21,6 +21,16 @@ public class Paiement implements Serializable {
     private Date dateHeure;
     @ManyToOne
     private Commande commandeReglee;
+
+    public Paiement() {
+    }
+
+    public Paiement(String nomClient, float montantParMoyenTTC, Date dateHeure, Commande commandeReglee) {
+        this.nomClient = nomClient;
+        this.montantParMoyenTTC = montantParMoyenTTC;
+        this.dateHeure = dateHeure;
+        this.commandeReglee = commandeReglee;
+    }
     
     public int getNumFacture() {
         return numFacture;

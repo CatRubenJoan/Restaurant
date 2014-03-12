@@ -18,12 +18,12 @@ public class Serveur implements Serializable {
     @OneToMany(mappedBy = "serveur")
     private Collection<Emplacement> tables;
     
-    
     public Serveur() {
         tables = new ArrayList<>();
     }
 
     public Serveur(String codeIHM, String nom) {
+        this();
         this.codeIHM = codeIHM;
         this.nom = nom;
     }
@@ -49,7 +49,10 @@ public class Serveur implements Serializable {
     }
 
     public void setTables(Collection<Emplacement> tables) {
-        this.tables = tables;
+        for (Emplacement table : tables) {
+            this.tables.add(table);
+        }
+//        this.tables = tables;
     }
 
     @Override
