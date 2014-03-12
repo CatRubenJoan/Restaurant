@@ -23,7 +23,7 @@ public class EJBPaiement implements EJBPaiementLocal {
 
     boolean test = true;
          
-            Paiement mp = new Paiement(numFacture,nomClient, montantParMoyenTTC,dateHeure);
+            Paiement mp = new Paiement(nomClient, montantParMoyenTTC,dateHeure, new Commande());
             em.persist(mp);
             test=true;
             return test;
