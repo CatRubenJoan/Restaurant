@@ -5,8 +5,11 @@
 package controllers;
 
 import beanSession.EJBMoyenPaiementLocal;
+import beanSession.EJBPaiementLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,28 +17,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author cdi402
- */
-@WebServlet(name = "test", urlPatterns = {"/test"})
-public class test extends HttpServlet {
+@WebServlet(name = "servTestJoan", urlPatterns = {"/servTestJoan"})
+public class servTestJoan extends HttpServlet {
 
     @EJB
     private EJBMoyenPaiementLocal moyenPaiement;
-    
-    
-    
-    /**
-     * Processes requests for both HTTP
-     * <code>GET</code> and
-     * <code>POST</code> methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    @EJB
+    private EJBPaiementLocal testPaiement;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -45,15 +34,19 @@ public class test extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet test</title>");            
+            out.println("<title>Servlet testJoan</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("HELLO");
-            out.println(moyenPaiement.ajouterMoyenPaiement("CB","carte bleue"));
-            out.println("<h1>Servlet test at " + request.getContextPath() + "</h1>");
+
+            out.println("dftsdftdtfrdfty");
+            out.println(moyenPaiement.ajouterMoyenPaiement("CB", "carte bleue"));
+            moyenPaiement.creerMoyenPaiement();
+            Date d1 = new GregorianCalendar(2014, 0, 10).getTime();
+            out.println(testPaiement.creerMoyenPaiement(1, "dupond", 50.3f, d1));
+
             out.println("</body>");
             out.println("</html>");
-        } finally {            
+        } finally {
             out.close();
         }
     }

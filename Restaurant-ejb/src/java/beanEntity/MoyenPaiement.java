@@ -1,10 +1,14 @@
 package beanEntity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class MoyenPaiement implements Serializable {
@@ -13,11 +17,15 @@ public class MoyenPaiement implements Serializable {
     @Id
     private String codePaiement;
     private String typePaiement;
+    @ManyToMany(mappedBy = "moyenpaiements")
+    private Collection<Paiement> paiements;
 
     public MoyenPaiement() {
+        paiements = new ArrayList<>();
     }
 
     public MoyenPaiement(String codePaiement, String typePaiement) {
+        this();
         this.codePaiement = codePaiement;
         this.typePaiement = typePaiement;
     }

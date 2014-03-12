@@ -1,11 +1,14 @@
 package beanEntity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
@@ -21,6 +24,20 @@ public class Paiement implements Serializable {
     private Date dateHeure;
     @ManyToOne
     private Commande commandeReglee;
+    @ManyToMany
+    private Collection<MoyenPaiement> moyenpaiements;
+            
+    public Paiement() {
+        moyenpaiements=new ArrayList<>();
+    }
+
+    public Paiement(int numFacture, String nomClient, float montantParMoyenTTC, Date dateHeure) {
+        this();
+        this.numFacture = numFacture;
+        this.nomClient = nomClient;
+        this.montantParMoyenTTC = montantParMoyenTTC;
+        this.dateHeure = dateHeure;     
+    }
     
     public int getNumFacture() {
         return numFacture;
