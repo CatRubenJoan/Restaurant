@@ -4,6 +4,7 @@
  */
 package beanSession;
 
+import beanEntity.Cuisinier;
 import javax.ejb.Local;
 
 /**
@@ -13,4 +14,5 @@ import javax.ejb.Local;
 @Local
 public interface EJBCuisinierLocal {
     public boolean creerCuisinier(String codeIHM, String nom);
+    public Cuisinier unCuisinier(String code);
 }

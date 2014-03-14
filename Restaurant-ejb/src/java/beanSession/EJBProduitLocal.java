@@ -5,7 +5,6 @@
 package beanSession;
 
 import beanEntity.Produit;
-import beanEntity.SousType;
 import java.util.ArrayList;
 import javax.ejb.Local;
 
@@ -19,4 +18,5 @@ public interface EJBProduitLocal {
     public boolean attribuerCuisinier(int prod, String cuisi);
     public boolean attribuerPromotion(int prod, int promo);
     public boolean attribuerPromotion(ArrayList<Produit> prod, int promo);
+    public boolean modifierStatutProduit(int idProduit, String idStatut);
 }

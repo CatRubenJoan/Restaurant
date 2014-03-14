@@ -8,6 +8,7 @@ import beanEntity.Cuisinier;
 import beanEntity.Produit;
 import beanEntity.Promotion;
 import beanEntity.SousType;
+import beanEntity.Statut;
 import java.util.ArrayList;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -43,7 +44,6 @@ public class EJBProduit implements EJBProduitLocal {
             Cuisinier c1 = em.find(Cuisinier.class, c);
             c1.getLesProduits().add(p1);
             p1.setCuisto(c1);
-            em.merge(c1);
             em.merge(p1);
 
             test = true;
@@ -80,6 +80,24 @@ public class EJBProduit implements EJBProduitLocal {
             }
             test = true;
         }
+        return test;
+    }
+
+    @Override
+    public boolean modifierStatutProduit(int idProduit, String idStatut) {
+        boolean test = false;
+        
+        if ((em.find(Produit.class, idProduit) != null) && (em.find(Statut.class, idStatut) != null)) {
+            Produit p1 = em.find(Produit.class, idProduit);
+            Statut s1 = (em.find(Statut.class, idStatut));
+            p1.getInfoStatut().getLesProduits().remove(p1);
+            p1.setInfoStatut(s1);
+            s1.getLesProduits().add(p1);
+            em.merge(p1);
+
+            test = true;
+        }
+        
         return test;
     }
 }

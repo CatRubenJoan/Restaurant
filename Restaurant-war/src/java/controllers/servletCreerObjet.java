@@ -81,9 +81,13 @@ public class servletCreerObjet extends HttpServlet {
             out.println("<br>" + p1);
             out.println("<br>" + p2);
             out.println("<br>Attribuer un cuisinier");
-//            out.println("<br>" + eJBProduit.attribuerCuisinier(Integer.toString(p2), "1000"));
+            out.println("<br>" + eJBProduit.attribuerCuisinier(p2, "1000"));
             out.println("<br>Attribuer une promotion");
-//            out.println("<br>" + eJBProduit.attribuerPromotion(Integer.toString(p1), idPromo));
+            out.println("<br>" + eJBProduit.attribuerPromotion(p1, idPromo));
+            out.println("<br>Ajouter un type");
+            out.println("<br>" + eJBType.ajouterType("BEU","BEURK"));
+            out.println("<br>Modifier un Statut");
+            out.println("<br>" + eJBProduit.modifierStatutProduit(p1, "TRANS"));
 
             out.println("</body>");
             out.println("</html>");
