@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
@@ -21,6 +22,8 @@ public class Paiement implements Serializable {
     private Date dateHeure;
     @ManyToOne
     private Commande commandeReglee;
+    @ManyToMany
+    private MoyenPaiement moyenpaiements;
 
     public Paiement() {
     }
