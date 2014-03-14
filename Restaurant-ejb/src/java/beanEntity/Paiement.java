@@ -1,6 +1,8 @@
 package beanEntity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,17 +24,17 @@ public class Paiement implements Serializable {
     private Date dateHeure;
     @ManyToOne
     private Commande commandeReglee;
-    @ManyToMany
+    @ManyToOne
     private MoyenPaiement moyenpaiements;
 
     public Paiement() {
     }
 
-    public Paiement(String nomClient, float montantParMoyenTTC, Date dateHeure, Commande commandeReglee) {
-//        this.nomClient = nomClient;
+    public Paiement(String nomClient, float montantParMoyenTTC, Date dateHeure) {
+        this();
+        this.nomClient = nomClient;
         this.montantParMoyenTTC = montantParMoyenTTC;
         this.dateHeure = dateHeure;
-        this.commandeReglee = commandeReglee;
     }
     
     public int getNumFacture() {
@@ -74,6 +76,14 @@ public class Paiement implements Serializable {
     public void setCommandeReglee(Commande commandeReglee) {
         this.commandeReglee = commandeReglee;
     }
+
+//    public MoyenPaiement getMoyenpaiements() {
+//        return moyenpaiements;
+//    }
+//
+//    public void setMoyenpaiements(MoyenPaiement moyenpaiements) {
+//        this.moyenpaiements = moyenpaiements;
+//    }
 
     @Override
     public String toString() {
