@@ -19,11 +19,11 @@ public class EJBPaiement implements EJBPaiementLocal {
         em.persist(object);
     }
     @Override
-    public boolean creerMoyenPaiement(int numFacture, String nomClient,float montantParMoyenTTC,Date dateHeure){
+    public boolean creerPaiement( String nomClient,float montantParMoyenTTC,Date dateHeure){
 
     boolean test = true;
          
-            Paiement mp = new Paiement(nomClient, montantParMoyenTTC,dateHeure, new Commande());
+            Paiement mp = new Paiement(nomClient, montantParMoyenTTC,dateHeure);
             em.persist(mp);
             test=true;
             return test;

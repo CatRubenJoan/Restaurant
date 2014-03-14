@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class MoyenPaiement implements Serializable {
@@ -17,7 +18,7 @@ public class MoyenPaiement implements Serializable {
     @Id
     private String codePaiement;
     private String typePaiement;
-    @ManyToMany(mappedBy = "moyenpaiements")
+    @OneToMany(mappedBy = "moyenpaiements")
     private Collection<Paiement> paiements;
 
     public MoyenPaiement() {
@@ -28,6 +29,14 @@ public class MoyenPaiement implements Serializable {
         this();
         this.codePaiement = codePaiement;
         this.typePaiement = typePaiement;
+    }
+
+    public Collection<Paiement> getPaiements() {
+        return paiements;
+    }
+
+    public void setPaiements(Collection<Paiement> paiements) {
+        this.paiements = paiements;
     }
 
     

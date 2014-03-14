@@ -7,5 +7,5 @@ import javax.ejb.Local;
 @Local
 public interface EJBPaiementLocal {
     
-    public boolean creerMoyenPaiement(int numFacture, String nomClient,float montantParMoyenTTC,Date dateHeure);
+    public boolean creerPaiement( String nomClient,float montantParMoyenTTC,Date dateHeure);
 }
