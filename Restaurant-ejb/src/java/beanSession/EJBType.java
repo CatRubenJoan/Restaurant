@@ -4,6 +4,8 @@
  */
 package beanSession;
 
+import beanEntity.Produit;
+import beanEntity.SousType;
 import beanEntity.Type;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -50,7 +52,12 @@ public class EJBType implements EJBTypeLocal {
         }
         return test;
     }
-
+/**
+ * Modifie le libelle du type.
+ * @param id
+ * @param lib
+ * @return 
+ */
     @Override
     public boolean modifierType(String id, String lib) {
         boolean test = false;
@@ -63,21 +70,35 @@ public class EJBType implements EJBTypeLocal {
         }
         return test;
     }
-
+/**
+ * Supprimer un type entraîne la suppression des soustype associés.
+ * @param id
+ * @return true si la transaction c'est bien passer.
+ * Id sous type des produit est mis a null.
+ */
     @Override
     public boolean supprimerType(String id) {
         boolean test = false;
 
         if (em.find(Type.class, id) != null) {
             Type t1 = em.find(Type.class, id);
+            for(SousType s : t1.getLesSousType())
+            {
+                for(Produit p : s.getLesProduits())
+                {
+                    p.setSousType(null);
+                    em.merge(p);
+                }
+            }
             em.remove(t1);
             test = true;
         }
         return test;
     }
 
-//    @Override
-//    public Type unType(String id) {
-//        
-//    }
+    @Override
+    public Type unType(String id) {
+        Type t = em.find(Type.class, id);
+        return t;
+    }
 }

@@ -4,6 +4,7 @@
  */
 package beanSession;
 
+import beanEntity.Produit;
 import beanEntity.SousType;
 import beanEntity.Type;
 import javax.ejb.Stateless;
@@ -118,10 +119,9 @@ public class EJBSousType implements EJBSousTypeLocal {
             if (em.find(SousType.class, id) != null) {
                 SousType s1 = em.find(SousType.class, id);
                 s1.setInfoSousType(lib);
-                
                 s1.getType().getLesSousType().remove(s1);
+                s1.setType(t);
                 t.getLesSousType().add(s1);
-                
                 em.merge(s1);
                 test = true;
             }
@@ -131,6 +131,23 @@ public class EJBSousType implements EJBSousTypeLocal {
 
     @Override
     public boolean supprimerSousType(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean test = false;
+
+        if (em.find(SousType.class, id) != null) {
+            SousType s = em.find(SousType.class, id);
+            for (Produit p : s.getLesProduits()) {
+                p.setSousType(null);
+                em.merge(p);
+            }
+            em.remove(s);
+            test = true;
+        }
+        return test;
+    }
+
+    @Override
+    public SousType unSousType(String id) {
+        SousType s = em.find(SousType.class, id);
+        return s;
     }
 }

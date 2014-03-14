@@ -4,6 +4,7 @@
  */
 package beanSession;
 
+import beanEntity.Statut;
 import javax.ejb.Local;
 
 /**
@@ -14,4 +15,7 @@ import javax.ejb.Local;
 public interface EJBStatutLocal {
     public void creerStatut();
     public boolean ajouterStatut(String id, String lib);
+    public boolean modifierStatut(String id, String lib);
+    public boolean supprimerStatut(String id);
+    public Statut unStatut(String id);
 }

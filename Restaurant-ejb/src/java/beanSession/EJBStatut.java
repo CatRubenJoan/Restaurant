@@ -4,6 +4,7 @@
  */
 package beanSession;
 
+import beanEntity.Produit;
 import beanEntity.Statut;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -50,7 +51,44 @@ public class EJBStatut implements EJBStatutLocal {
             em.persist(s1);
             test = true;
         }
-
         return test;
+    }
+
+    @Override
+    public boolean modifierStatut(String id, String lib) {
+        boolean test = false;
+
+        if (em.find(Statut.class, id) != null) {
+            Statut s1 = em.find(Statut.class, id);
+            s1.setInfoStatut(lib);
+            em.merge(s1);
+            test = true;
+        }
+        return test;
+    }
+
+    @Override
+    public boolean supprimerStatut(String id) {
+        boolean test = false;
+
+        if (!"AUCUN".equals(id)) {
+            if (em.find(Statut.class, id) != null) {
+                Statut s1 = em.find(Statut.class, id);
+                for(Produit p : s1.getLesProduits())
+                {
+                    p.setInfoStatut(null);
+                    em.merge(p);
+                }
+                em.remove(s1);
+                test = true;
+            }
+        }
+        return test;
+    }
+
+    @Override
+    public Statut unStatut(String id) {
+        Statut s = em.find(Statut.class, id);
+        return s;
     }
 }
