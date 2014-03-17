@@ -1,10 +1,12 @@
 package beanSession;
 
+import beanEntity.Commande;
+import beanEntity.Produit;
 import java.util.Date;
 import javax.ejb.Local;
 
 @Local
-public interface CommandeEnCoursLocal {
+public interface EJBCommandeLocal {
 
     public boolean creerCommandeBidon(Date dateHeure, int nbPersonne);
 
@@ -18,5 +20,5 @@ public interface CommandeEnCoursLocal {
 
     public float reglementCommande(int noCommandeARegler, int montant);
 
-    public boolean ajouterProduit(int noCommande, Integer noProduit, int qte, String commentaire);
+    public boolean ajoutPlatCommande(Commande c, Produit p, int qte, String commentaire);
 }

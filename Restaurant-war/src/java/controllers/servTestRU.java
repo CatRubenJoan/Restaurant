@@ -1,7 +1,7 @@
 package controllers;
 
 import beanEntity.SousType;
-import beanSession.CommandeEnCoursLocal;
+import beanSession.EJBCommandeLocal;
 import beanSession.EJBProduitLocal;
 import beanSession.EJBSousTypeLocal;
 import beanSession.EJBStatutLocal;
@@ -28,7 +28,7 @@ public class servTestRU extends HttpServlet {
     @EJB
     private EJBProduitLocal eJBProduit;
     @EJB
-    private CommandeEnCoursLocal commandeEnCours;
+    private EJBCommandeLocal commandeEnCours;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -82,15 +82,13 @@ public class servTestRU extends HttpServlet {
             out.println(eJBProduit.creerProduit("Snake surprise", "Serpent surprise", "150 cal", "Recette traditionnelle", true, 16.8f, "ENTCH"));
             out.println("<strong>creer produits DONE</strong>");
             out.println("</p>");
-//
-//
+            
 //            out.println("<p>");
 //            //public float reglementCommande(int noCommandeARegler, int montant)
 //            out.println(commandeEnCours.reglementCommande(1, 17));
 //            out.println("<strong>creer paiements DONE</strong>");
 //            out.println("</p>");
 
-            
             out.println("bazinga");
             out.println("<p>me piace</p>");
             out.println("</body>");

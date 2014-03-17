@@ -13,11 +13,49 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-public class CommandeEnCours implements CommandeEnCoursLocal {
+public class EJBCommande implements EJBCommandeLocal {
 
     @PersistenceContext(unitName = "Restaurant-ejbPU")
     private EntityManager em;
 
+//        Commande c = new Commande(new GregorianCalendar().getInstance().getTime(), noCommande);
+    
+    @Override
+    public boolean ajoutPlatCommande(Commande c, Produit p, int qte, String commentaire) {
+
+        boolean platOK = false;
+        ArrayList<LigneCommande> lcExistantes = (ArrayList) c.getLignesCommande();
+
+        LigneCommande lc = new LigneCommande(qte, commentaire);
+        lc.setCommande(c);
+        lc.setProduit(p);
+        lc.setPrixHTLC(p.getPrixHt() * qte);
+
+        if (!lcExistantes.isEmpty()) {
+            for (LigneCommande lcom : lcExistantes) {
+                if (p.equals(lcom.getProduit())) {
+                    if (qte == lcom.getQte()) {
+                        platOK = false;
+                    } else {
+                        lcom.setQte(qte); //verifier remplacement de valeurs dans collection
+                        platOK = true;
+                    }
+                } else {
+                    lcExistantes.add(lc);
+                    platOK = true;
+                }
+            }
+        } else {
+            //initialiser collection ligne commande
+            ArrayList<LigneCommande> lcInit = new ArrayList<>();
+            lcInit.add(lc);
+            c.setLignesCommande(lcInit);
+            platOK = true;
+        }
+        return platOK;
+    }
+
+    /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ TESTS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
     @Override
     public boolean creerTable(int capacite, String codeIHM) {
         Emplacement emp = new Emplacement(capacite, codeIHM);
@@ -62,27 +100,11 @@ public class CommandeEnCours implements CommandeEnCoursLocal {
         em.persist(c);
         return true;
     }
-    
+
     @Override
-    public boolean ajouterProduit(int noCommande, Integer noProduit, int qte, String commentaire){
-        
-        LigneCommande lc = new LigneCommande(qte, commentaire);        
-        
-        lc.setCommande(em.find(Commande.class, noCommande));
-        
-        lc.setProduit(em.find(Produit.class, noProduit));
-        
-        lc.setPrixHTLC((lc.getProduit().getPrixHt())*lc.getQte());
-                
-        return true;
-    }
-    
-    
-    @Override
-    public float reglementCommande(int noCommandeARegler, int montant){
-        
+    public float reglementCommande(int noCommandeARegler, int montant) {
+
 //        Commande aRegler = em.find
         return 0f;
     }
-    
 }
