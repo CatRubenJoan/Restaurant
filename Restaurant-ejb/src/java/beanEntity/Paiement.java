@@ -28,6 +28,8 @@ public class Paiement implements Serializable {
     private MoyenPaiement moyenpaiements;
 
     public Paiement() {
+//        commandeReglee=null;
+//        moyenpaiements=null;
     }
 
     public Paiement(String nomClient, float montantParMoyenTTC, Date dateHeure) {
