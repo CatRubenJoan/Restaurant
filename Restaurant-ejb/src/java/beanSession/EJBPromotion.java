@@ -5,10 +5,12 @@
 package beanSession;
 
 import beanEntity.Promotion;
+import java.util.Collection;
 import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -31,5 +33,15 @@ public class EJBPromotion implements EJBPromotionLocal {
     public Promotion unePromotion(int id) {
         Promotion p = em.find(Promotion.class, id);
         return p;
+    }
+
+    @Override
+    public Collection<Promotion> lesPromotions(Date date) {
+        String texteRequête = "SELECT promotion "
+                + "FROM Promotion AS promotion "
+                + "WHERE ?1 BETWEEN promotion.dateDebut AND promotion.dateFin";
+        Query requête = em.createQuery(texteRequête);
+        requête.setParameter(1, date);
+        return requête.getResultList();
     }
 }

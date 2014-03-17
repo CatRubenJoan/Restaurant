@@ -22,10 +22,5 @@ public class EJBPaiement implements EJBPaiementLocal {
         Paiement mp = new Paiement(nomClient, montantParMoyenTTC, dateHeure); 
         em.persist(mp);
         
-       
-       
-
-
-
     }
 }

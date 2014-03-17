@@ -100,4 +100,69 @@ public class EJBProduit implements EJBProduitLocal {
         
         return test;
     }
+
+    @Override
+    public boolean retirerPromotion(int prod, int promo) {
+        boolean test = false;
+
+        if ((em.find(Produit.class, prod) != null) && (em.find(Promotion.class, promo) != null)) {
+            Produit p1 = em.find(Produit.class, prod);
+            Promotion pr1 = (em.find(Promotion.class, promo));
+            pr1.getLesProduits().remove(p1);
+            p1.setPromo(null);
+            em.merge(p1);
+
+            test = true;
+        }
+        return test;
+    }
+
+    @Override
+    public boolean retirerPromotion(ArrayList<Produit> prod, int promo) {
+         boolean test = false;
+
+        if (em.find(Promotion.class, promo) != null) {
+            Promotion pr1 = (em.find(Promotion.class, promo));
+            for (Produit p : prod) {
+                pr1.getLesProduits().remove(p);
+                p.setPromo(null);
+                em.merge(p);
+            }
+            test = true;
+        }
+        return test;
+    }
+
+    @Override
+    public boolean retirerPromotion(int promo) {
+        boolean test = false;
+
+        if (em.find(Promotion.class, promo) != null) {
+            Promotion pr1 = (em.find(Promotion.class, promo));
+            for (Produit p : pr1.getLesProduits()) {
+                p.setPromo(null);
+                em.merge(p);
+            }
+            pr1.getLesProduits().clear();
+            em.merge(pr1);
+            test = true;
+        }
+        return test;
+    }
+
+    @Override
+    public boolean retirerCuisinier(int prod, String cuisi) {
+        boolean test = false;
+
+        if ((em.find(Produit.class, prod) != null) && (em.find(Cuisinier.class, cuisi) != null)) {
+            Produit p1 = em.find(Produit.class, prod);
+            Cuisinier c1 = (em.find(Cuisinier.class, cuisi));
+            c1.getLesProduits().remove(p1);
+            p1.setCuisto(null);
+            em.merge(p1);
+
+            test = true;
+        }
+        return test;
+    }
 }
