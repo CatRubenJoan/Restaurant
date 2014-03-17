@@ -39,10 +39,10 @@ public class servTestJoan extends HttpServlet {
             out.println("<body>");
 
             out.println("dftsdftdtfrdfty");
-            out.println(moyenPaiement.ajouterMoyenPaiement("CB", "carte bleue"));
             moyenPaiement.creerMoyenPaiement();
-            Date d1 = new GregorianCalendar(2014, 0, 10).getTime();
-            out.println(testPaiement.creerMoyenPaiement(1, "dupond", 50.3f, d1));
+            out.println(moyenPaiement.ajouterMoyenPaiement("TEST", "carte bleue test"));
+//            Date d1 = new GregorianCalendar(2014, 0, 10).getTime();
+//            out.println(testPaiement.creerMoyenPaiement(1, "dupond", 50.3f, d1));
 
             out.println("</body>");
             out.println("</html>");
