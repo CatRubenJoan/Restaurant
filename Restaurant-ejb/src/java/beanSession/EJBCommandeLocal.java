@@ -21,4 +21,6 @@ public interface EJBCommandeLocal {
     public float reglementCommande(int noCommandeARegler, int montant);
 
     public boolean ajoutPlatCommande(Commande c, Produit p, int qte, String commentaire);
+
+    public boolean validerCommande(String noCommande);
 }

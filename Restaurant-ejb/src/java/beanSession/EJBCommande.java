@@ -19,29 +19,32 @@ public class EJBCommande implements EJBCommandeLocal {
     private EntityManager em;
 
 //        Commande c = new Commande(new GregorianCalendar().getInstance().getTime(), noCommande);
-    
     @Override
     public boolean ajoutPlatCommande(Commande c, Produit p, int qte, String commentaire) {
-
         boolean platOK = false;
         ArrayList<LigneCommande> lcExistantes = (ArrayList) c.getLignesCommande();
 
+        //initialisation ligne de commande en cours de saisie
         LigneCommande lc = new LigneCommande(qte, commentaire);
         lc.setCommande(c);
         lc.setProduit(p);
         lc.setPrixHTLC(p.getPrixHt() * qte);
 
+        //parcours lignes de commande existantes pour une commande
         if (!lcExistantes.isEmpty()) {
             for (LigneCommande lcom : lcExistantes) {
+                //test égalité produits
                 if (p.equals(lcom.getProduit())) {
+                    //test et opérations quantités
                     if (qte == lcom.getQte()) {
                         platOK = false;
-                    } else if(qte == 0){
+                    } else if (qte == 0) {
                         int ind = lcExistantes.indexOf(lcom);
                         LigneCommande annulation = lcExistantes.remove(ind);
                         platOK = true;
-                    }else {
-                        lcom.setQte(qte); //verifier remplacement de valeurs dans collection
+                    } else {
+                        //a verifier : remplacement de valeurs dans collection
+                        lcom.setQte(qte); 
                         platOK = true;
                     }
                 } else {
@@ -57,6 +60,16 @@ public class EJBCommande implements EJBCommandeLocal {
             platOK = true;
         }
         return platOK;
+    }
+
+    @Override
+    public boolean validerCommande(String noCommande) {
+        boolean ok = false;
+        Commande c = em.find(Commande.class, noCommande);
+        if (c != null) {
+            ok = true;
+        }
+        return ok;
     }
 
     /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ TESTS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/

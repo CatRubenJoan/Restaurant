@@ -16,7 +16,7 @@ public class EJBCarte implements EJBCarteLocal {
 
     @Override
     public Collection<Produit> listeProduitsParCat(String idSousType) {
-        String req = "SELECT p FROM PRODUIT p WHERE p.DISPONIBILITE = :paramID1 AND p.SOUSTYPE_ID";
+        String req = "SELECT p FROM PRODUIT p WHERE p.DISPONIBILITE = :paramID1 AND p.SOUSTYPE_ID = :paramID2";
         Query qr = em.createQuery(req);
         qr.setParameter("paramID1", true);
         qr.setParameter("paramID2", idSousType);
