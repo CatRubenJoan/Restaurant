@@ -36,7 +36,11 @@ public class EJBCommande implements EJBCommandeLocal {
                 if (p.equals(lcom.getProduit())) {
                     if (qte == lcom.getQte()) {
                         platOK = false;
-                    } else {
+                    } else if(qte == 0){
+                        int ind = lcExistantes.indexOf(lcom);
+                        LigneCommande annulation = lcExistantes.remove(ind);
+                        platOK = true;
+                    }else {
                         lcom.setQte(qte); //verifier remplacement de valeurs dans collection
                         platOK = true;
                     }
