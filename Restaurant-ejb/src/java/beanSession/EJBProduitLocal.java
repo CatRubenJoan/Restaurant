@@ -16,7 +16,11 @@ import javax.ejb.Local;
 public interface EJBProduitLocal {
     public Produit creerProduit(String nom, String composition, String qualiteNutritive, String historique, boolean disponibilite, float prixHt, String sousTypeId);
     public boolean attribuerCuisinier(int prod, String cuisi);
+    public boolean retirerCuisinier(int prod, String cuisi);
     public boolean attribuerPromotion(int prod, int promo);
     public boolean attribuerPromotion(ArrayList<Produit> prod, int promo);
+    public boolean retirerPromotion(int prod, int promo);
+    public boolean retirerPromotion(ArrayList<Produit> prod, int promo);
+    public boolean retirerPromotion(int promo);
     public boolean modifierStatutProduit(int idProduit, String idStatut);
 }

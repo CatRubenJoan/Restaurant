@@ -32,9 +32,6 @@ public class EJBCuisinier implements EJBCuisinierLocal {
         return test;
     }
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
-
     @Override
     public Cuisinier unCuisinier(String code) {
         Cuisinier c = em.find(Cuisinier.class, code);
