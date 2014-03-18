@@ -18,7 +18,7 @@ public class EJBCommande implements EJBCommandeLocal {
     @PersistenceContext(unitName = "Restaurant-ejbPU")
     private EntityManager em;
 
-//        Commande c = new Commande(new GregorianCalendar().getInstance().getTime(), noCommande);
+
     @Override
     public boolean ajoutPlatCommande(Commande c, Produit p, int qte, String commentaire) {
         boolean platOK = false;

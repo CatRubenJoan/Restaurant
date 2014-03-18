@@ -39,6 +39,12 @@ public class Commande implements Serializable {
         this.dateHeure = dateHeure;
         this.nbPersonne = nbPersonne;
     }
+
+    public Commande(Date dateHeure, int nbPersonne, Emplacement table) {
+        this.dateHeure = dateHeure;
+        this.nbPersonne = nbPersonne;
+        this.table = table;
+    } 
     
     public int getNumCommande() {
         return numCommande;
