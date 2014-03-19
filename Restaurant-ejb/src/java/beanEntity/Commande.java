@@ -34,18 +34,17 @@ public class Commande implements Serializable {
         lignesCommande = new ArrayList<>();
     }
 
-    public Commande(int numCommande, Date dateHeure, int nbPersonne) {
-        this();
-        this.numCommande = numCommande;
-        this.dateHeure = dateHeure;
-        this.nbPersonne = nbPersonne;
-    }
-
     public Commande(Date dateHeure, int nbPersonne) {
         this();
         this.dateHeure = dateHeure;
         this.nbPersonne = nbPersonne;
-    }    
+    }
+
+    public Commande(Date dateHeure, int nbPersonne, Emplacement table) {
+        this.dateHeure = dateHeure;
+        this.nbPersonne = nbPersonne;
+        this.table = table;
+    } 
     
     public int getNumCommande() {
         return numCommande;
