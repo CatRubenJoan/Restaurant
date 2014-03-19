@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import beanSession.CommandeEnCoursLocal;
 import beanSession.EJBMoyenPaiementLocal;
 import beanSession.EJBPaiementLocal;
 import java.io.IOException;
@@ -24,6 +25,9 @@ public class servTestJoan extends HttpServlet {
     private EJBMoyenPaiementLocal moyenPaiement;
     @EJB
     private EJBPaiementLocal testPaiement;
+    @EJB
+    private CommandeEnCoursLocal testcommande;
+  
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -38,14 +42,15 @@ public class servTestJoan extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
 
-           
-            
+            Date d2 = new GregorianCalendar(2014, 5, 16).getTime();
+            testcommande.creerCommandeBidonWTable(d2, 3, 8);
             out.println(moyenPaiement.ajouterMoyenPaiement("TEST", "test"));
            
             moyenPaiement.creerMoyenPaiement();
             Date d1 = new GregorianCalendar(2014, 0, 10).getTime();
-            testPaiement.creerPaiement("dupond", 50.3f, d1);
-
+            testPaiement.creerPaiement("dupond", 50.3f, d1,"CB",1);
+            testPaiement.creerPaiement("albert", 58.9f, d1,"UI",2);
+            
             out.println("</body>");
             out.println("</html>");
         } finally {

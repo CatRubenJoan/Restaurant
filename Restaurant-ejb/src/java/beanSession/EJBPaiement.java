@@ -15,12 +15,22 @@ public class EJBPaiement implements EJBPaiementLocal {
     private EntityManager em;
 
     @Override
-    public void creerPaiement(String nomClient, float montantParMoyenTTC, Date dateHeure) {
+    public Paiement creerPaiement(String nomClient, float montantParMoyenTTC, Date dateHeure, String codePaiement, int numCommande) {
 
-       
+        Paiement p=null;
+        if (em.find(MoyenPaiement.class, codePaiement)!=null){
+        MoyenPaiement mp = em.find(MoyenPaiement.class, codePaiement);
 
-        Paiement mp = new Paiement(nomClient, montantParMoyenTTC, dateHeure); 
-        em.persist(mp);
+        p = new Paiement(nomClient, montantParMoyenTTC, dateHeure);
+        mp.getPaiements().add(p);
+        p.setMoyenpaiements(mp);
         
+        Commande c= em.find(Commande.class, numCommande);
+        c.getPaiements().add(p);
+        p.setCommandeReglee(c);
+        
+        em.persist(p);
+        }
+        return p;
     }
 }
