@@ -7,8 +7,10 @@ package beanEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -22,7 +24,7 @@ public class Type implements Serializable {
     @Id
     private String id;
     private String infoType;
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "type")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "type")
     private Collection<SousType> lesSousType;
 
     public Type() {

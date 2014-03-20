@@ -2,7 +2,6 @@ package controllers;
 
 import beanEntity.Produit;
 import beanEntity.Promotion;
-import beanSession.CommandeEnCoursLocal;
 import beanSession.EJBCuisinierLocal;
 import beanSession.EJBProduitLocal;
 import beanSession.EJBPromotionLocal;
@@ -35,8 +34,6 @@ public class servletCreerObjet extends HttpServlet {
     private EJBProduitLocal eJBProduit;
     @EJB
     private EJBCuisinierLocal eJBCuisinier;
-    @EJB
-    private CommandeEnCoursLocal commandeEnCours;
 
     /**
      * Processes requests for both HTTP

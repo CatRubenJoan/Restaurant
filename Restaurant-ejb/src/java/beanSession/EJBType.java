@@ -7,9 +7,11 @@ package beanSession;
 import beanEntity.Produit;
 import beanEntity.SousType;
 import beanEntity.Type;
+import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -99,6 +101,16 @@ public class EJBType implements EJBTypeLocal {
     @Override
     public Type unType(String id) {
         Type t = em.find(Type.class, id);
+        em.detach(t);
         return t;
     }
+
+    @Override
+    public Collection<Type> lesTypes() {
+        String texteRequête = "SELECT t "
+                + "FROM Type AS t";
+        Query requête = em.createQuery(texteRequête);
+        return requête.getResultList();
+    }
+    
 }

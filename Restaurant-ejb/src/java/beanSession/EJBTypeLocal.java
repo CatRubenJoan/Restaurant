@@ -5,6 +5,7 @@
 package beanSession;
 
 import beanEntity.Type;
+import java.util.Collection;
 import javax.ejb.Local;
 
 /**
@@ -18,4 +19,5 @@ public interface EJBTypeLocal {
     public boolean modifierType(String id, String lib);
     public boolean supprimerType(String id);
     public Type unType(String id);
+    public Collection<Type> lesTypes();
 }
