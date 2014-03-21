@@ -12,6 +12,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
@@ -19,6 +20,7 @@ import javax.persistence.OneToMany;
  * @author cdi412
  */
 @Entity
+@NamedQuery(name = "allType", query = "SELECT t FROM Type t")
 public class Type implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

@@ -148,6 +148,8 @@ public class EJBSousType implements EJBSousTypeLocal {
     @Override
     public SousType unSousType(String id) {
         SousType s = em.find(SousType.class, id);
+        for (Produit p : s.getLesProduits()) {
+        }
         return s;
     }
 }

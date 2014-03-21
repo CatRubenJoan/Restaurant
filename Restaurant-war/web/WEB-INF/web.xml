@@ -15,6 +15,10 @@
             <param-name>pageSousType</param-name>
             <param-value>controllers.SsControllerSousType</param-value>
         </init-param>
+        <init-param>
+            <param-name>pageListeProduit</param-name>
+            <param-value>controllers.SsControllerListeProduit</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>controllerPrincipal</servlet-name>
@@ -36,5 +40,11 @@
         <ejb-ref-type>Session</ejb-ref-type>
         <local>beanSession.EJBTypeLocal</local>
         <ejb-link>Restaurant-ejb.jar#EJBType</ejb-link>
+    </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>EJBSousType</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>beanSession.EJBSousTypeLocal</local>
+        <ejb-link>Restaurant-ejb.jar#EJBSousType</ejb-link>
     </ejb-local-ref>
 </web-app>

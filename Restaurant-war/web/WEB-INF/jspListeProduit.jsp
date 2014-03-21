@@ -1,6 +1,6 @@
 <%-- 
-    Document   : jspSousType
-    Created on : 20 mars 2014, 11:22:20
+    Document   : jspListeProduit
+    Created on : 21 mars 2014, 09:43:42
     Author     : cdi412
 --%>
 
@@ -13,9 +13,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Les sous types</h1>
-    <c:forEach var="st" items="${sType}">
-        <a href="controllerPrincipal?section=pageListeProduit&st=${st.id}">${st.infoSousType}</a><br>
+        <h1>Les Produits</h1>
+    <c:forEach var="p" items="${listProduit}">
+        <a href="">${p.nom}</a><br>
     </c:forEach>
     </body>
 </html>

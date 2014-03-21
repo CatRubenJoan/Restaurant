@@ -107,10 +107,7 @@ public class EJBType implements EJBTypeLocal {
 
     @Override
     public Collection<Type> lesTypes() {
-        String texteRequête = "SELECT t "
-                + "FROM Type AS t";
-        Query requête = em.createQuery(texteRequête);
+        Query requête = em.createNamedQuery("allType");
         return requête.getResultList();
-    }
-    
+    }    
 }

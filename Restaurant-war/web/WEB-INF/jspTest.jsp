@@ -7,7 +7,8 @@
         <title>JSP TEST</title>
     </head>
     <body>
-        <h1>Salve Munde!</h1>        
+        <h1>Salve Munde!</h1>
         <a href="controllerPrincipal?section=pageX">2eme jsp</a><br>
+        <a href="controllerPrincipal?section=pageType">Type</a><br>
     </body>
 </html>

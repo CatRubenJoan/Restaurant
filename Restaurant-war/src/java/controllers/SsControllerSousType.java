@@ -30,10 +30,6 @@ public class SsControllerSousType implements controllerInterface {
 
         if (idType != null) {
             Type t = eJBType.unType(idType);
-            System.out.println("SousType");
-            for (SousType sType : t.getLesSousType()) {
-                System.out.println(sType.getInfoSousType());
-            }
             request.setAttribute("sType", t.getLesSousType());
         }
         return url;
