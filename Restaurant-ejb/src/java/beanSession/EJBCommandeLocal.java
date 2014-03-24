@@ -23,4 +23,6 @@ public interface EJBCommandeLocal {
     public boolean ajoutPlatCommande(Commande c, Produit p, int qte, String commentaire);
 
     public boolean validerCommande(String noCommande);
+
+    public Commande creationCommande(int nbPersonne, String noTable);
 }

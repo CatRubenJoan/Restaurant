@@ -6,6 +6,7 @@ import beanEntity.LigneCommande;
 import beanEntity.Produit;
 import beanEntity.Serveur;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import javax.ejb.Stateless;
@@ -18,6 +19,15 @@ public class EJBCommande implements EJBCommandeLocal {
     @PersistenceContext(unitName = "Restaurant-ejbPU")
     private EntityManager em;
 
+    @Override
+    public Commande creationCommande(int nbPersonne, String noTable){
+        int notab = Integer.parseInt(noTable);
+        Emplacement table = em.find(Emplacement.class, notab);     
+        Commande c = new Commande(Calendar.getInstance().getTime(), nbPersonne, table);
+        em.persist(c);
+//        em.detach(c);
+        return c;
+    }
 
     @Override
     public boolean ajoutPlatCommande(Commande c, Produit p, int qte, String commentaire) {

@@ -1,3 +1,6 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -6,6 +9,8 @@
         <title>Ma commande</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>${nocommande}</h1>
+
+        <c:set var="nocommande" value="${nocommande}" scope="request"/>
     </body>
 </html>

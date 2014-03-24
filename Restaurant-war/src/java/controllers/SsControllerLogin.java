@@ -36,7 +36,7 @@ public class SsControllerLogin implements controllerInterface {
                 request.setAttribute("erreurlogin", n);
             } else {
                 //clients
-                if (typeIHM == 0 && "C".equals(request.getParameter("type"))) {
+                if (typeIHM == 0) {
                     url = "/WEB-INF/jspBienvenueClient.jsp";
                     request.setAttribute("notable", n);
                     request.setAttribute("nbconvives", p);
