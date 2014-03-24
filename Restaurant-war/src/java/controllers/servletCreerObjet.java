@@ -2,6 +2,7 @@ package controllers;
 
 import beanEntity.Produit;
 import beanEntity.Promotion;
+import beanSession.EJBCommandeLocal;
 import beanSession.EJBCuisinierLocal;
 import beanSession.EJBProduitLocal;
 import beanSession.EJBPromotionLocal;
@@ -34,17 +35,9 @@ public class servletCreerObjet extends HttpServlet {
     private EJBProduitLocal eJBProduit;
     @EJB
     private EJBCuisinierLocal eJBCuisinier;
+    @EJB
+    private EJBCommandeLocal commandeEnCours;
 
-    /**
-     * Processes requests for both HTTP
-     * <code>GET</code> and
-     * <code>POST</code> methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -109,8 +102,43 @@ public class servletCreerObjet extends HttpServlet {
                     out.println("<br>" + prod.getNom() + " - " + prod.getReference());
                 }
             }
-
             out.println("<br>BOUH !!!");
+
+            out.println("<p>");
+            out.println(commandeEnCours.creerServeur("1000", "Chuck Norris"));
+            out.println(commandeEnCours.creerServeur("1001", "Ludwig van Beethoven"));
+            out.println("<strong>creer serveurs DONE</strong>");
+            out.println("</p>");
+
+            out.println("<p>");
+            out.println(commandeEnCours.creerTableWServeur(2, "0001", "1001"));
+            out.println(commandeEnCours.creerTableWServeur(4, "0002", "1000"));
+            out.println(commandeEnCours.creerTableWServeur(8, "0003", "1000"));
+            out.println(commandeEnCours.creerTableWServeur(4, "0004", "1000"));
+            out.println(commandeEnCours.creerTableWServeur(2, "0005", "1001"));
+            out.println(commandeEnCours.creerTableWServeur(10, "0006", "1000"));
+            out.println(commandeEnCours.creerTableWServeur(4, "0007", "1001"));
+            out.println(commandeEnCours.creerTableWServeur(6, "0008", "1000"));
+            out.println(commandeEnCours.creerTableWServeur(8, "0009", "1000"));
+            out.println(commandeEnCours.creerTableWServeur(4, "0010", "1001"));
+            out.println("<strong>creer tables DONE</strong>");
+            out.println("</p>");
+
+            out.println("<p>");
+            //public boolean creerCommandeBidonWTable(Date dateHeure, int nbPersonne, int noTable)
+            out.println(commandeEnCours.creerCommandeBidonWTable(new GregorianCalendar(2012, 11, 10, 11, 57, 05).getTime(), 2, 1));
+            out.println(commandeEnCours.creerCommandeBidonWTable(new Date(), 2, 1));
+            out.println(commandeEnCours.creerCommandeBidonWTable(new Date(), 1, 1));
+            out.println(commandeEnCours.creerCommandeBidonWTable(new Date(), 3, 2));
+            out.println(commandeEnCours.creerCommandeBidonWTable(new Date(), 4, 2));
+            out.println(commandeEnCours.creerCommandeBidonWTable(new Date(), 2, 2));
+            out.println(commandeEnCours.creerCommandeBidonWTable(new Date(), 3, 2));
+            out.println(commandeEnCours.creerCommandeBidonWTable(new Date(), 6, 3));
+            out.println(commandeEnCours.creerCommandeBidonWTable(new Date(), 7, 3));
+            out.println("<strong>creer commandes DONE</strong>");
+            out.println("</p>");
+            
+            out.println("bazinga");
             out.println("</body>");
             out.println("</html>");
         } finally {

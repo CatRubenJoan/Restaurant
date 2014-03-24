@@ -19,6 +19,14 @@
             <param-name>pageListeProduit</param-name>
             <param-value>controllers.SsControllerListeProduit</param-value>
         </init-param>
+        <init-param>
+            <param-name>pageLogin</param-name>
+            <param-value>controllers.SsControllerLogin</param-value>
+        </init-param>
+        <init-param>
+            <param-name>pageCommande</param-name>
+            <param-value>controllers.SsControllerCommande</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>controllerPrincipal</servlet-name>
@@ -46,5 +54,17 @@
         <ejb-ref-type>Session</ejb-ref-type>
         <local>beanSession.EJBSousTypeLocal</local>
         <ejb-link>Restaurant-ejb.jar#EJBSousType</ejb-link>
+    </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>EJBTable</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>beanSession.EJBTableLocal</local>
+        <ejb-link>Restaurant-ejb.jar#EJBTable</ejb-link>
+    </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>EJBLogin</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>beanSession.EJBLoginLocal</local>
+        <ejb-link>Restaurant-ejb.jar#EJBLogin</ejb-link>
     </ejb-local-ref>
 </web-app>
