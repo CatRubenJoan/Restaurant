@@ -10,6 +10,7 @@ import beanSession.EJBProduitLocal;
 import beanSession.EJBPromotionLocal;
 import beanSession.EJBSousTypeLocal;
 import beanSession.EJBStatutLocal;
+import beanSession.EJBTVALocal;
 import beanSession.EJBTypeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,6 +25,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "servletCreerObjet", urlPatterns = {"/servletCreerObjet"})
 public class servletCreerObjet extends HttpServlet {
+    @EJB
+    private EJBTVALocal eJBTVA;
     @EJB
     private EJBPaiementLocal testPaiement;
     @EJB
@@ -145,6 +148,12 @@ public class servletCreerObjet extends HttpServlet {
             Date d2 = new GregorianCalendar(2014, 5, 16).getTime();
             out.println(moyenPaiement.ajouterMoyenPaiement("TEST", "test"));
            
+            out.println("<p>");
+            out.println(eJBTVA.creerTVA(5.5f));
+            out.println(eJBTVA.creerTVA(7f));
+            out.println("<strong>creer tva DONE</strong>");
+            out.println("</p>");            
+            
             moyenPaiement.creerMoyenPaiement();
             Date d1 = new GregorianCalendar(2014, 0, 10).getTime();
             testPaiement.creerPaiement("dupond", 50.3f, d1,"CB",1);

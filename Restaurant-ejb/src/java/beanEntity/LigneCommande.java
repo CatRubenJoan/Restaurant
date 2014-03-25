@@ -20,7 +20,9 @@ public class LigneCommande implements Serializable {
     private Commande commande;
     @ManyToOne
     private Produit produit;
-
+    @ManyToOne
+    private TVA tva;
+    
     public LigneCommande() {
     }
 
@@ -81,6 +83,14 @@ public class LigneCommande implements Serializable {
 
     public void setProduit(Produit produit) {
         this.produit = produit;
+    }
+
+    public TVA getTva() {
+        return tva;
+    }
+
+    public void setTva(TVA tva) {
+        this.tva = tva;
     }
 
     @Override
