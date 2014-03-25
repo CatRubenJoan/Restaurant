@@ -84,20 +84,48 @@ public class EJBProduit implements EJBProduitLocal {
     }
 
     @Override
-    public boolean modifierStatutProduit(int idProduit, String idStatut) {
+    public boolean modifierStatutProduit(int idProduit) {
         boolean test = false;
 
-        if ((em.find(Produit.class, idProduit) != null) && (em.find(Statut.class, idStatut) != null)) {
+        if (em.find(Produit.class, idProduit) != null) {
             Produit p1 = em.find(Produit.class, idProduit);
-            Statut s1 = (em.find(Statut.class, idStatut));
-            p1.getInfoStatut().getLesProduits().remove(p1);
-            p1.setInfoStatut(s1);
-            s1.getLesProduits().add(p1);
-            em.merge(p1);
+            Statut s1 = null;
+
+            switch (p1.getInfoStatut().getId()) {
+                case "AUCUN":
+                    s1 = (em.find(Statut.class, "TRANS"));
+                    p1.getInfoStatut().getLesProduits().remove(p1);
+                    p1.setInfoStatut(s1);
+                    s1.getLesProduits().add(p1);
+                    em.merge(p1);
+                    break;
+                case "TRANS":
+                    s1 = (em.find(Statut.class, "PREPA"));
+                    p1.getInfoStatut().getLesProduits().remove(p1);
+                    p1.setInfoStatut(s1);
+                    s1.getLesProduits().add(p1);
+                    em.merge(p1);
+                    break;
+                case "PREPA":
+                    s1 = (em.find(Statut.class, "PRET"));
+                    p1.getInfoStatut().getLesProduits().remove(p1);
+                    p1.setInfoStatut(s1);
+                    s1.getLesProduits().add(p1);
+                    em.merge(p1);
+                    break;
+                case "PRET":
+                    s1 = (em.find(Statut.class, "AUCUN"));
+                    p1.getInfoStatut().getLesProduits().remove(p1);
+                    p1.setInfoStatut(s1);
+                    s1.getLesProduits().add(p1);
+                    em.merge(p1);
+                    break;
+                default:
+                    break;
+            }
 
             test = true;
         }
-
         return test;
     }
 
