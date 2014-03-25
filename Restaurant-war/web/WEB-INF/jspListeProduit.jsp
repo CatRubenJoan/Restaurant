@@ -15,7 +15,7 @@
     <body>
         <h1>Les Produits</h1>
     <c:forEach var="p" items="${listProduit}">
-        <a href="">${p.nom}</a><br>
+        <a href="controllerPrincipal?section=pageDetailProduit&produit=${p.reference}">${p.nom}</a><br>
     </c:forEach>
     </body>
 </html>

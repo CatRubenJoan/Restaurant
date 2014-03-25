@@ -86,7 +86,7 @@ public class EJBProduit implements EJBProduitLocal {
     @Override
     public boolean modifierStatutProduit(int idProduit, String idStatut) {
         boolean test = false;
-        
+
         if ((em.find(Produit.class, idProduit) != null) && (em.find(Statut.class, idStatut) != null)) {
             Produit p1 = em.find(Produit.class, idProduit);
             Statut s1 = (em.find(Statut.class, idStatut));
@@ -97,7 +97,7 @@ public class EJBProduit implements EJBProduitLocal {
 
             test = true;
         }
-        
+
         return test;
     }
 
@@ -119,7 +119,7 @@ public class EJBProduit implements EJBProduitLocal {
 
     @Override
     public boolean retirerPromotion(ArrayList<Produit> prod, int promo) {
-         boolean test = false;
+        boolean test = false;
 
         if (em.find(Promotion.class, promo) != null) {
             Promotion pr1 = (em.find(Promotion.class, promo));
@@ -164,5 +164,12 @@ public class EJBProduit implements EJBProduitLocal {
             test = true;
         }
         return test;
+    }
+
+    @Override
+    public Produit unProduit(int ref) {
+        Produit p = em.find(Produit.class, ref);
+        em.detach(p);
+        return p;
     }
 }

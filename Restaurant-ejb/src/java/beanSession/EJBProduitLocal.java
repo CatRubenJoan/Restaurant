@@ -23,4 +23,5 @@ public interface EJBProduitLocal {
     public boolean retirerPromotion(ArrayList<Produit> prod, int promo);
     public boolean retirerPromotion(int promo);
     public boolean modifierStatutProduit(int idProduit, String idStatut);
+    public Produit unProduit(int ref);
 }

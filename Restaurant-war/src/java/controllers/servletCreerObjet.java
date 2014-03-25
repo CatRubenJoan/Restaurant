@@ -4,6 +4,8 @@ import beanEntity.Produit;
 import beanEntity.Promotion;
 import beanSession.EJBCommandeLocal;
 import beanSession.EJBCuisinierLocal;
+import beanSession.EJBMoyenPaiementLocal;
+import beanSession.EJBPaiementLocal;
 import beanSession.EJBProduitLocal;
 import beanSession.EJBPromotionLocal;
 import beanSession.EJBSousTypeLocal;
@@ -22,7 +24,10 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "servletCreerObjet", urlPatterns = {"/servletCreerObjet"})
 public class servletCreerObjet extends HttpServlet {
-
+    @EJB
+    private EJBPaiementLocal testPaiement;
+    @EJB
+    private EJBMoyenPaiementLocal moyenPaiement;
     @EJB
     private EJBPromotionLocal eJBPromotion;
     @EJB
@@ -137,7 +142,13 @@ public class servletCreerObjet extends HttpServlet {
             out.println(commandeEnCours.creerCommandeBidonWTable(new Date(), 7, 3));
             out.println("<strong>creer commandes DONE</strong>");
             out.println("</p>");
-            
+            Date d2 = new GregorianCalendar(2014, 5, 16).getTime();
+            out.println(moyenPaiement.ajouterMoyenPaiement("TEST", "test"));
+           
+            moyenPaiement.creerMoyenPaiement();
+            Date d1 = new GregorianCalendar(2014, 0, 10).getTime();
+            testPaiement.creerPaiement("dupond", 50.3f, d1,"CB",1);
+            testPaiement.creerPaiement("albert", 58.9f, d1,"UI",2);
             out.println("bazinga");
             out.println("</body>");
             out.println("</html>");
