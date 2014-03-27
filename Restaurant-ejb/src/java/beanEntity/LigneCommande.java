@@ -27,11 +27,13 @@ public class LigneCommande implements Serializable {
     }
 
     public LigneCommande(int qte, String commentaire) {
+        vat=null;
         this.qte = qte;
         this.commentaire = commentaire;
     }
 
     public LigneCommande(int qte, float prixHTLC, String commentaire) {
+        vat=null;
         this.qte = qte;
         this.prixHTLC = prixHTLC;
         this.commentaire = commentaire;
