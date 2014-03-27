@@ -19,11 +19,12 @@ public class EJBCommande implements EJBCommandeLocal {
     private EntityManager em;
 
     @Override
-    public Commande creationCommande(int nbPersonne, String noTable){
+    public Commande creationCommande(String nbPersonne, String noTable){
         int notab = Integer.parseInt(noTable);
+        int noper = Integer.parseInt(nbPersonne);
         Emplacement table = em.find(Emplacement.class, notab);     
 //        Commande c = new Commande(Calendar.getInstance().getTime(), nbPersonne, table);
-        Commande c = new Commande(Calendar.getInstance().getTime(), nbPersonne, table);
+        Commande c = new Commande(Calendar.getInstance().getTime(), noper, table);
         em.persist(c);
 //        em.detach(c);
         return c;

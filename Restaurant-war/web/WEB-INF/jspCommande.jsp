@@ -7,7 +7,9 @@
         <title>Ma commande</title>
     </head>
     <body>
-        <h1>Commande n° ${nocommande.numCommande}</h1>
-        <h2>Commande n° ${nocommande.dateHeure}</h2>
+        <h1>Commande n° ${commande.numCommande}</h1>
+        <h2>${commande.dateHeure}</h2>
+        <h3>Convives ${commande.nbPersonne}</h3>
+        <h4>Table n° ${commande.table}</h3>
     </body>
 </html>

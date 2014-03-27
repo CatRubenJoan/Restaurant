@@ -3,7 +3,6 @@ package beanSession;
 import beanEntity.Commande;
 import beanEntity.LigneCommande;
 import beanEntity.Produit;
-import beanEntity.TVA;
 import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -25,12 +24,15 @@ public class EJBLigneCommande implements EJBLigneCommandeLocal {
         int noProd = Integer.parseInt(noProduit);
         Produit p = em.find(Produit.class, noProd);
         Collection<LigneCommande> lcs = enCours.getLignesCommande();
-        lcs.add(lc);
+
         lc.setProduit(p);
         lc.setCommande(enCours);
+        lc.setTva(null);
+        
+        lcs.add(lc);        
 //        TVA vat = new TVA(10f);
 //        em.persist(vat);
-        lc.setTva(null);
+
         enCours.setLignesCommande(lcs);
         em.persist(lc);
         em.persist(enCours);

@@ -29,14 +29,12 @@ public class EJBTVA implements EJBTVALocal {
     @Override
     public boolean modifierTVA(float gam, float ny){
         boolean ok = false;
-        if(em.find(TVA.class, gam) == null){
-            TVA newTVA = new TVA(ny);
-            em.persist(newTVA);
-            ok = true;
-        }else{
+        if(em.find(TVA.class, gam) != null){
             TVA toMod = em.find(TVA.class, gam);
             toMod.setTaux(ny);
             em.merge(toMod);
+        }else{
+            ok = creerTVA(gam);
         }
         return ok;
     }    
@@ -55,6 +53,7 @@ public class EJBTVA implements EJBTVALocal {
     @Override
     public TVA uneTVA(String tx) {
         TVA tva = em.find(TVA.class, tx);
+        em.detach(tva);
         return tva;
     }    
     

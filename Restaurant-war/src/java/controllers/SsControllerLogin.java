@@ -43,8 +43,7 @@ public class SsControllerLogin implements controllerInterface {
                 //clients
                 if (typeIHM == 0) {
                     url = "/WEB-INF/jspBienvenueClient.jsp";
-                    int nbPersonnes = Integer.parseInt(p);
-                    Commande order = eJBCommande.creationCommande(nbPersonnes, n);
+                    Commande order = eJBCommande.creationCommande(p, n);
                     session.setAttribute("commande", order);
 //                    session.setAttribute("notable", n);
 //                    session.setAttribute("nbconvives", p);

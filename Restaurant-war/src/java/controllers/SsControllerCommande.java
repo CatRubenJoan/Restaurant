@@ -20,29 +20,38 @@ public class SsControllerCommande implements controllerInterface {
         String url = "/WEB-INF/jspCommande.jsp";
 
         HttpSession session = request.getSession();
+        Commande order = (Commande) session.getAttribute("commande");
         
-        if (session.getAttribute("commande") == null) {
+        //cas accès aux commandes sans login
+        if (order == null) {
             url = "/WEB-INF/jspLogin.jsp";
-            
-//          if (request.getParameter("convives") != null && request.getParameter("table") != null) {
-          if (session.getAttribute("nbconvives") != null && session.getAttribute("notable") != null) {  
-//            session.setAttribute("intecommande", "Veuillez vous identifier");            
-            String s = (String) session.getAttribute("nbconvives");
-            int nbPersonnes = Integer.parseInt(s);
-            String noTable = (String) session.getAttribute("notable");
-            Commande order = eJBCommande.creationCommande(nbPersonnes, noTable);
-            session.setAttribute("commande", order);
-            request.setAttribute("nocommande", order.getNumCommande());
-          }
-//            url = "/controllerPrincipal?section=pageType";
+        //cas client loggé
         }else{
-            Commande order = (Commande) session.getAttribute("commande");
-            session.setAttribute("nocommande", order);
+//            request.setAttribute("nocom", order.getNumCommande());
+//            request.setAttribute("notab", order.getTable().getNumero());
+//            request.setAttribute("nbper", order.getNbPersonne());
+        }
 
-                if(!order.getLignesCommande().isEmpty()){
-                    request.setAttribute("lignescommande", order.getLignesCommande());
-                }
-                
+
+//          if (request.getParameter("convives") != null && request.getParameter("table") != null) {
+//        if (session.getAttribute("nbconvives") != null && session.getAttribute("notable") != null) {
+//            session.setAttribute("intecommande", "Veuillez vous identifier");            
+//            String s = (String) session.getAttribute("nbconvives");
+//            int nbPersonnes = Integer.parseInt(s);
+//            String noTable = (String) session.getAttribute("notable");
+//            Commande order = eJBCommande.creationCommande(nbPersonnes, noTable);
+//            session.setAttribute("commande", order);
+//            request.setAttribute("nocommande", order.getNumCommande());
+
+//            url = "/controllerPrincipal?section=pageType";
+//        } else {
+//            Commande order = (Commande) session.getAttribute("commande");
+//            session.setAttribute("nocommande", order);
+//
+//            if (!order.getLignesCommande().isEmpty()) {
+//                request.setAttribute("lignescommande", order.getLignesCommande());
+//            }
+
 //            if(session.getAttribute("objcommande")!=null){
 //                Commande enCours = (Commande) session.getAttribute("objcommande");
 //                request.setAttribute("nocommande", enCours.getNumCommande());
@@ -53,7 +62,7 @@ public class SsControllerCommande implements controllerInterface {
 //            int noComInt = Integer.parseInt(noComString);
 //            Commande enCours = eJBCommande.uneCommande(noComInt);
 //            request.setAttribute("objcommande", enCours);
-        }
+//        }
         return url;
     }
 
