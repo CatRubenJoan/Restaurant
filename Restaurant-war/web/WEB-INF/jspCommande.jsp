@@ -7,8 +7,7 @@
         <title>Ma commande</title>
     </head>
     <body>
-        <h1>${nocommande}</h1>
-
-        <c:set var="nocommande" value="${nocommande}" scope="request"/>
+        <h1>Commande n° ${nocommande.numCommande}</h1>
+        <h2>Commande n° ${nocommande.dateHeure}</h2>
     </body>
 </html>

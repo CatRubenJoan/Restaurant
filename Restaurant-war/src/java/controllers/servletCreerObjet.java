@@ -4,6 +4,7 @@ import beanEntity.Produit;
 import beanEntity.Promotion;
 import beanSession.EJBCommandeLocal;
 import beanSession.EJBCuisinierLocal;
+import beanSession.EJBLigneCommandeLocal;
 import beanSession.EJBMoyenPaiementLocal;
 import beanSession.EJBPaiementLocal;
 import beanSession.EJBProduitLocal;
@@ -25,6 +26,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "servletCreerObjet", urlPatterns = {"/servletCreerObjet"})
 public class servletCreerObjet extends HttpServlet {
+    @EJB
+    private EJBLigneCommandeLocal eJBLigneCommande;
     @EJB
     private EJBTVALocal eJBTVA;
     @EJB
@@ -148,6 +151,12 @@ public class servletCreerObjet extends HttpServlet {
             Date d2 = new GregorianCalendar(2014, 5, 16).getTime();
             out.println(moyenPaiement.ajouterMoyenPaiement("TEST", "test"));
            
+            out.println("<p>");
+            out.println(eJBLigneCommande.ajoutLigneCommande("1", 2, 12.3f, "sans sel", "1"));
+            out.println(eJBLigneCommande.ajoutLigneCommande("1", 1, 15.3f, "sans le sorbet", "3"));
+            out.println("<strong>creer lignecommande DONE</strong>");
+            out.println("</p>");                  
+            
             out.println("<p>");
             out.println(eJBTVA.creerTVA(5.5f));
             out.println(eJBTVA.creerTVA(7f));

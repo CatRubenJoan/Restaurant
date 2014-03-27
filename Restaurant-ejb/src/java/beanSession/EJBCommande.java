@@ -7,7 +7,6 @@ import beanEntity.Produit;
 import beanEntity.Serveur;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -23,12 +22,20 @@ public class EJBCommande implements EJBCommandeLocal {
     public Commande creationCommande(int nbPersonne, String noTable){
         int notab = Integer.parseInt(noTable);
         Emplacement table = em.find(Emplacement.class, notab);     
+//        Commande c = new Commande(Calendar.getInstance().getTime(), nbPersonne, table);
         Commande c = new Commande(Calendar.getInstance().getTime(), nbPersonne, table);
         em.persist(c);
 //        em.detach(c);
         return c;
     }
 
+    @Override
+    public Commande uneCommande(int noCommande){
+        Commande c = em.find(Commande.class, noCommande); 
+        em.detach(c);
+        return c;
+    }
+    
     @Override
     public boolean ajoutPlatCommande(Commande c, Produit p, int qte, String commentaire) {
         boolean platOK = false;

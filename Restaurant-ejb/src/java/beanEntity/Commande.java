@@ -96,6 +96,6 @@ public class Commande implements Serializable {
 
     @Override
     public String toString() {
-        return "Commande n°" + numCommande + "\n\t Table : "+table;
+        return "Commande n°" + numCommande + "\n\t"+table;
     }
 }

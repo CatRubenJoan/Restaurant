@@ -1,6 +1,7 @@
 package beanEntity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -11,10 +12,11 @@ public class TVA implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private float taux;
-    @OneToMany(mappedBy = "tva")
+    @OneToMany(mappedBy = "vat")
     private Collection<LigneCommande> ligneCommande;
 
     public TVA() {
+        ligneCommande = new ArrayList();
     }
 
     public TVA(float taux) {

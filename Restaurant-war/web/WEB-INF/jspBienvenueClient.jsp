@@ -8,7 +8,7 @@
     <body>
         <h1>Hello Client!</h1>
         <p>Votre emplacement : Table n°${notable}</p>
-        <p><a href="controllerPrincipal?section=pageCommande&table=${notable}&convives=${nbconvives}">Commander</a></p>
+        <p><a href="controllerPrincipal?section=pageCommande">Commander</a></p>
         <p>Appel serveur</p>
     </body>
 </html>

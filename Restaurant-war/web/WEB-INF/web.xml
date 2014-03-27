@@ -83,4 +83,10 @@
         <local>beanSession.EJBProduitLocal</local>
         <ejb-link>Restaurant-ejb.jar#EJBProduit</ejb-link>
     </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>EJBCommande1</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>beanSession.EJBCommandeLocal</local>
+        <ejb-link>Restaurant-ejb.jar#EJBCommande</ejb-link>
+    </ejb-local-ref>
 </web-app>

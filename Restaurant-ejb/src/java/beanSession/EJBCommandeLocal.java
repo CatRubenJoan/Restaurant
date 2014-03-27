@@ -25,4 +25,6 @@ public interface EJBCommandeLocal {
     public boolean validerCommande(String noCommande);
 
     public Commande creationCommande(int nbPersonne, String noTable);
+
+    public Commande uneCommande(int noCommande);
 }
