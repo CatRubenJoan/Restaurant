@@ -1,9 +1,13 @@
 package controllers;
 
 import beanEntity.Commande;
+import beanEntity.Type;
 import beanSession.EJBCommandeLocal;
 import beanSession.EJBLoginLocal;
+import beanSession.EJBSousType;
 import beanSession.EJBTableLocal;
+import beanSession.EJBTypeLocal;
+import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -14,8 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class SsControllerLogin implements controllerInterface {
-    EJBCommandeLocal eJBCommande = lookupEJBCommandeLocal();
 
+    EJBTypeLocal eJBType = lookupEJBTypeLocal();
+    EJBCommandeLocal eJBCommande = lookupEJBCommandeLocal();
     EJBLoginLocal eJBLogin = lookupEJBLoginLocal();
     EJBTableLocal eJBTable = lookupEJBTableLocal();
 
@@ -26,7 +31,7 @@ public class SsControllerLogin implements controllerInterface {
 
         if ("E".equals(request.getParameter("type"))) {
             url = "/WEB-INF/jspLoginEmployes.jsp";
-        } 
+        }
         if ("C".equals(request.getParameter("type"))) {
             url = "/WEB-INF/jspLoginTable.jsp";
         }
@@ -45,6 +50,8 @@ public class SsControllerLogin implements controllerInterface {
                     url = "/WEB-INF/jspBienvenueClient.jsp";
                     Commande order = eJBCommande.creationCommande(p, n);
                     session.setAttribute("commande", order);
+                    Collection<Type> lesType = eJBType.lesTypes();
+                    request.setAttribute("type", lesType);
 //                    session.setAttribute("notable", n);
 //                    session.setAttribute("nbconvives", p);
 //                    request.setAttribute("notable", n);
@@ -87,6 +94,16 @@ public class SsControllerLogin implements controllerInterface {
         try {
             Context c = new InitialContext();
             return (EJBCommandeLocal) c.lookup("java:global/Restaurant/Restaurant-ejb/EJBCommande!beanSession.EJBCommandeLocal");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
+    private EJBTypeLocal lookupEJBTypeLocal() {
+        try {
+            Context c = new InitialContext();
+            return (EJBTypeLocal) c.lookup("java:global/Restaurant/Restaurant-ejb/EJBType!beanSession.EJBTypeLocal");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);

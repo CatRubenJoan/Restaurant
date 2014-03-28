@@ -22,10 +22,6 @@ public class SsControllerListeProduit implements controllerInterface{
 
         if (idSousType != null) {
             SousType st = eJBSousType.unSousType(idSousType);
-            System.out.println("SousType");
-            for (Produit p : st.getLesProduits()) {
-                System.out.println(p.getNom());
-            }
             request.setAttribute("listProduit", st.getLesProduits());
         }
         return url;

@@ -8,10 +8,6 @@
             <param-value>controllers.TESTsousController</param-value>
         </init-param>
         <init-param>
-            <param-name>pageType</param-name>
-            <param-value>controllers.SsControllerType</param-value>
-        </init-param>
-        <init-param>
             <param-name>pageSousType</param-name>
             <param-value>controllers.SsControllerSousType</param-value>
         </init-param>
@@ -30,6 +26,10 @@
         <init-param>
             <param-name>pageDetailProduit</param-name>
             <param-value>controllers.SsControllerDetailProduit</param-value>
+        </init-param>
+        <init-param>
+            <param-name>pageAjoutProduit</param-name>
+            <param-value>controllers.SsControllerLigneCommande</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
@@ -88,5 +88,23 @@
         <ejb-ref-type>Session</ejb-ref-type>
         <local>beanSession.EJBCommandeLocal</local>
         <ejb-link>Restaurant-ejb.jar#EJBCommande</ejb-link>
+    </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>EJBType2</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>beanSession.EJBTypeLocal</local>
+        <ejb-link>Restaurant-ejb.jar#EJBType</ejb-link>
+    </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>EJBProduit1</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>beanSession.EJBProduitLocal</local>
+        <ejb-link>Restaurant-ejb.jar#EJBProduit</ejb-link>
+    </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>EJBLigneCommande</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>beanSession.EJBLigneCommandeLocal</local>
+        <ejb-link>Restaurant-ejb.jar#EJBLigneCommande</ejb-link>
     </ejb-local-ref>
 </web-app>

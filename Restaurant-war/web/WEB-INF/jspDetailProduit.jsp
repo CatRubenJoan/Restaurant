@@ -17,6 +17,6 @@
         <h3>${produit.composition}</h3>
         <h4>${produit.qualiteNutritive}</h4>
         <h5>${produit.historique}</h5>
-        <a href="">Commander</a>
+        <a href="controllerPrincipal?section=pageAjoutProduit&prod=${produit.reference}">Commander</a>
     </body>
 </html>

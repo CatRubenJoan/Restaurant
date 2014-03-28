@@ -7,8 +7,9 @@
     </head>
     <body>
         <h1>Hello Client!</h1>
-        <p>Votre emplacement : Table n°${commande}</p>
-        <p><a href="controllerPrincipal?section=pageCommande">Commander</a></p>
+        <p>Votre emplacement : Table n°${commande.table.numero}</p>
+        <jsp:include page="jspType.jsp" flush="true"/>
+        <!--<p><a href="controllerPrincipal?section=pageCommande">Commander</a></p>-->
         <p>Appel serveur</p>
     </body>
 </html>

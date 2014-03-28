@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
-    Document   : jspTestEntree
-    Created on : 19 mars 2014, 16:30:05
+    Document   : jspTestCommande
+    Created on : 27 mars 2014, 16:53:08
     Author     : cdi412
 --%>
 
@@ -13,9 +13,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Les types</h1>
-    <c:forEach var="t" items="${type}">
-        <a href="controllerPrincipal?section=pageSousType&t=${t.id}">${t.infoType}</a><br>
+    <c:forEach var="lc" items="${commande.lignesCommande}">
+        ${lc.produit.nom}
     </c:forEach>
     </body>
 </html>
