@@ -28,7 +28,7 @@ public class SsControllerLigneCommande implements controllerInterface {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String url = "/WEB-INF/jspTestCommande.jsp";
+        String url = "/WEB-INF/jspBienvenueClient.jsp";
         HttpSession session = request.getSession();
         Commande order = (Commande) session.getAttribute("commande");
         String refProd = request.getParameter("prod");
@@ -37,6 +37,7 @@ public class SsControllerLigneCommande implements controllerInterface {
             Produit p = eJBProduit.unProduit(Integer.parseInt(refProd));
             order = eJBLigneCommande.ajoutLigneCommande(Integer.toString(order.getNumCommande()), 1, p.getPrixHt(), "", refProd);
             session.setAttribute("commande", order);
+            url = "/controllerPrincipal?section=pageListeProduit&st="+p.getSousType().getId();
         }
         return url;
     }
