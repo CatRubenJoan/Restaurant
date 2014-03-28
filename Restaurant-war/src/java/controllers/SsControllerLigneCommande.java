@@ -32,10 +32,12 @@ public class SsControllerLigneCommande implements controllerInterface {
         HttpSession session = request.getSession();
         Commande order = (Commande) session.getAttribute("commande");
         String refProd = request.getParameter("prod");
+        String com = request.getParameter("commentaire");
 
         if (refProd != null) {
             Produit p = eJBProduit.unProduit(Integer.parseInt(refProd));
-            order = eJBLigneCommande.ajoutLigneCommande(Integer.toString(order.getNumCommande()), 1, p.getPrixHt(), "", refProd);
+            order = eJBLigneCommande.ajoutLigneCommande(Integer.toString(order.getNumCommande()), 1, p.getPrixHt(), com, refProd);
+            
             session.setAttribute("commande", order);
             url = "/controllerPrincipal?section=pageListeProduit&st="+p.getSousType().getId();
         }

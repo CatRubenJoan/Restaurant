@@ -7,9 +7,10 @@
         <title>Ma commande</title>
     </head>
     <body>
-        <h1>Commande n° ${commande.numCommande}</h1>
+        <h1>Commande n° ${commande.numCommande} Table n° ${commande.table.numero}</h1>
         <h2>${commande.dateHeure}</h2>
-        <h3>Convives ${commande.nbPersonne}</h3>
-        <h4>Table n° ${commande.table}</h3>
-    </body>
+            <c:forEach var="lc" items="${commande.lignesCommande}">
+                ${lc.produit.nom} / ${lc.commentaire}<br>
+            </c:forEach>
+</body>
 </html>

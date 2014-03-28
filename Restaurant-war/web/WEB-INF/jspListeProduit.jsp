@@ -14,8 +14,14 @@
     </head>
     <body>
         <h1>Les Produits</h1>
-    <c:forEach var="p" items="${listProduit}">
-        <a href="controllerPrincipal?section=pageDetailProduit&produit=${p.reference}">${p.nom}</a><br>
-    </c:forEach>
+        <c:forEach var="p" items="${listProduit}">
+            ${p.nom}
+            <form method="POST" action="controllerPrincipal?section=pageDetailProduit&produit=${p.reference}">
+            Commentaire (à point, sans sel, sans poils pubiens) : <input type="text" name="comment" size="50">
+            <INPUT type="submit" name="doIt" value="OK"/>
+            
+            </form>
+        </c:forEach>
+
     </body>
 </html>

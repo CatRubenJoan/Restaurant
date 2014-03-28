@@ -20,6 +20,10 @@ public class SsControllerListeProduit implements controllerInterface{
         String url = "/WEB-INF/jspListeProduit.jsp";
         String idSousType = request.getParameter("st");
 
+//        if(request.getParameter("comment")!=null){
+//            request.setAttribute("comment", request.getParameter("comment"));
+//        }
+        
         if (idSousType != null) {
             SousType st = eJBSousType.unSousType(idSousType);
             request.setAttribute("listProduit", st.getLesProduits());

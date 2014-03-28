@@ -25,6 +25,7 @@ public class SsControllerDetailProduit implements controllerInterface {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String url = "/WEB-INF/jspDetailProduit.jsp";
         String idProduit = request.getParameter("produit");
+        request.setAttribute("comment", request.getParameter("comment"));
         
         if (idProduit != null) {
             Produit p = eJBProduit.unProduit(Integer.parseInt(idProduit));
